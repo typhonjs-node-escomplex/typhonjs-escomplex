@@ -42,7 +42,7 @@
   ],
   "dependencies": {
     "check-types": "7.0.0",
-    "escomplex-core": "git+https://git@github.com/typhonjs-node-escomplex/escomplex-core.git",
+    "escomplex-core": "git+https://git@github.com/typhonjs-node-escomplex/escomplex-core.git#original",
     "snyk": "1.14.2"
   },
   "devDependencies": {

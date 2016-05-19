@@ -1,0 +1,9 @@
+.idea
+.DS_Store
+npm-debug.log
+coverage/
+dist/
+docs/
+node_modules/
+jspm_packages/
+test/fixture/docs/

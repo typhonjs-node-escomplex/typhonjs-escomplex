@@ -243,5 +243,62 @@ suite('index:', function () {
                 assert.strictEqual(result, 'core.analyse result');
             });
         });
+
+        suite('string esm source:', function () {
+            var options, result;
+
+            setup(function () {
+                options = {};
+
+                result = index.analyse('import foo from "./foo.js"; const s_BAR = 42; export default s_BAR;', options);
+            });
+
+            teardown(function () {
+                options = result = undefined;
+            });
+
+            test('esprima.parse was called once', function () {
+                assert.strictEqual(log.counts['esprima.parse'], 1);
+            });
+
+            test('esprima.parse was passed two arguments', function () {
+                assert.lengthOf(log.args['esprima.parse'][0], 2);
+            });
+
+            test('esprima.parse was given correct source', function () {
+                assert.strictEqual(log.args['esprima.parse'][0][0], 'import foo from "./foo.js"; const s_BAR = 42; export default s_BAR;');
+            });
+
+            test('esprima.parse was given correct options', function () {
+                assert.isObject(log.args['esprima.parse'][0][1]);
+                assert.isTrue(log.args['esprima.parse'][0][1].loc);
+                assert.strictEqual(log.args['esprima.parse'][0][1].sourceType, 'module');
+                assert.lengthOf(Object.keys(log.args['esprima.parse'][0][1]), 2);
+            });
+
+            test('core.analyse was called once', function () {
+                assert.strictEqual(log.counts['core.analyse'], 1);
+            });
+
+            test('core.analyse was passed three arguments', function () {
+                assert.lengthOf(log.args['core.analyse'][0], 3);
+            });
+
+            test('core.analyse was given correct ast', function () {
+                assert.strictEqual(log.args['core.analyse'][0][0], 'esprima.parse result');
+            });
+
+            test('core.analyse was given correct walker', function () {
+                assert.strictEqual(log.args['core.analyse'][0][1], walker);
+            });
+
+            test('core.analyse was given correct options', function () {
+                assert.strictEqual(log.args['core.analyse'][0][2], options);
+            });
+
+            test('correct result was returned', function () {
+                assert.strictEqual(result, 'core.analyse result');
+            });
+        });
     });
 });

@@ -6,6 +6,12 @@ var esprima = require('esprima');
 var walker = require('escomplex-core/src/walker');
 var core = require('escomplex-core/src/core');
 
+var esmRegex = /(^\s*|[}\);\n]\s*)(import\s*(['"]|(\*\s+as\s+)?[^"'\(\)\n;]+\s*from\s*['"]|\{)|export\s+\*\s+from\s+["']|export\s* (\{|default|function|class|var|const|let|async\s+function))/;
+
+var es5Options = { loc: true };
+
+var esmOptions = { loc: true, sourceType: 'module' };
+
 exports.analyse = analyse;
 
 function analyse (source, options) {
@@ -46,7 +52,9 @@ function filterSource (source) {
 }
 
 function getSyntaxTree (source) {
-    return esprima.parse(source, { loc: true });
+    var options = esmRegex.test(source) ? esmOptions : es5Options;
+
+    return esprima.parse(source, options);
 }
 
 function performAnalysis (ast, options) {

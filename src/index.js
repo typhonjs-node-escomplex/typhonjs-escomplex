@@ -1,25 +1,24 @@
 /*globals require, exports */
 'use strict';
 
-var check = require('check-types');
-var esprima = require('esprima');
-var walker = require('escomplex-core/src/walker');
+var espree = require('espree');
+
 var core = require('escomplex-core/src/core');
+var walker = require('escomplex-core/src/walker');
 
 var esmRegex = /(^\s*|[}\);\n]\s*)(import\s*(['"]|(\*\s+as\s+)?[^"'\(\)\n;]+\s*from\s*['"]|\{)|export\s+\*\s+from\s+["']|export\s* (\{|default|function|class|var|const|let|async\s+function))/;
 
-var es5Options = { loc: true };
-
-var esmOptions = { loc: true, sourceType: 'module' };
+var espreeOptions = { loc: true, ecmaVersion: 6, ecmaFeatures: {} };
+var espreeESMOptions = { loc: true, ecmaVersion: 6, sourceType: 'module', ecmaFeatures: {} };
 
 exports.analyse = analyse;
 
 function analyse (source, options) {
-    if (check.array(source)) {
+    if (Array.isArray(source)) {
         return analyseSources(source, options);
     }
 
-    return analyseSource(source, options);
+    return typeof source === 'string' ? analyseSource(source, options) : void 0;
 }
 
 function analyseSources (sources, options) {
@@ -52,9 +51,8 @@ function filterSource (source) {
 }
 
 function getSyntaxTree (source) {
-    var options = esmRegex.test(source) ? esmOptions : es5Options;
-
-    return esprima.parse(source, options);
+    var options = esmRegex.test(source) ? espreeESMOptions : espreeOptions;
+    return espree.parse(source, options);
 }
 
 function performAnalysis (ast, options) {

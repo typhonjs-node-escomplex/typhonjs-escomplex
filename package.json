@@ -1,6 +1,6 @@
 {
   "name": "escomplex",
-  "version": "2.0.0-alpha",
+  "version": "2.0.0",
   "description": "Software complexity analysis of JavaScript-family abstract syntax trees.",
   "homepage": "https://github.com/jared-stilwell/escomplex",
   "bugs": "https://github.com/jared-stilwell/escomplex/issues",
@@ -19,6 +19,10 @@
     }
   ],
   "contributors": [
+    {
+      "name": "Michael Leahy",
+      "url": "https://github.com/typhonrt"
+    },
     {
       "name": "Will Boyd",
       "url": "https://github.com/lonekorean"
@@ -41,29 +45,19 @@
     "metrics"
   ],
   "dependencies": {
-    "check-types": "7.0.0",
     "escomplex-core": "git+https://git@github.com/typhonjs-node-escomplex/escomplex-core.git#original-es6",
-    "snyk": "1.14.2"
+    "espree": "^3.0.0"
   },
   "devDependencies": {
-    "chai": "3.4.1",
-    "eslint": "2.2.0",
-    "esprima": "2.7.1",
-    "mocha": "2.3.4",
-    "mockery": "1.7.0",
-    "sinon": "1.16.1",
+    "chai": "^3.0.0",
+    "eslint": "^2.0.0",
+    "mocha": "^2.0.0",
+    "mockery": "^1.0.0",
+    "snyk": "^1.0.0",
     "spooks": "2.0.0"
   },
   "scripts": {
     "lint": "eslint test src",
     "test": "snyk test --dev && mocha --ui tdd --reporter spec --colors"
-  },
-  "eslintConfig": {
-    "extends": "eslint:recommended",
-    "parser": "esprima",
-    "env": {
-      "node": true,
-      "mocha": true
-    }
   }
 }

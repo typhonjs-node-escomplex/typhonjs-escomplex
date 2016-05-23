@@ -1,40 +1,35 @@
 /*globals require, exports */
 'use strict';
 
-var espree = require('./parser');
+var parser = require('./parser');
 
 var core = require('./core');
 var walker = require('escomplex-core/src/walker');
 
-var esmRegex = /(^\s*|[}\);\n]\s*)(import\s*(['"]|(\*\s+as\s+)?[^"'\(\)\n;]+\s*from\s*['"]|\{)|export\s+\*\s+from\s+["']|export\s* (\{|default|function|class|var|const|let|async\s+function))/;
-
-var espreeOptions = { loc: true, ecmaVersion: 6, ecmaFeatures: {} };
-var espreeESMOptions = { loc: true, ecmaVersion: 6, sourceType: 'module', ecmaFeatures: {} };
-
 exports.analyse = analyse;
 
-function analyse (source, options) {
+function analyse (source, options, parserOptions) {
     if (Array.isArray(source)) {
-        return analyseSources(source, options);
+        return analyseSources(source, options, parserOptions);
     }
 
-    return typeof source === 'string' ? analyseSource(source, options) : void 0;
+    return typeof source === 'string' ? analyseSource(source, options, parserOptions) : void 0;
 }
 
-function analyseSources (sources, options) {
+function analyseSources (sources, options, parserOptions) {
     return performAnalysis(
         sources.map(
-            mapSource.bind(null, options)
+            mapSource.bind(null, options, parserOptions)
         ).filter(filterSource),
         options
     );
 }
 
-function mapSource (options, source) {
+function mapSource (options, parserOptions, source) {
     try {
         return {
             path: source.path,
-            ast: getSyntaxTree(source.code)
+            ast: getSyntaxTree(source.code, parserOptions)
         };
     } catch (error) {
         if (options.ignoreErrors) {
@@ -50,15 +45,14 @@ function filterSource (source) {
     return !!source;
 }
 
-function getSyntaxTree (source) {
-    var options = esmRegex.test(source) ? espreeESMOptions : espreeOptions;
-    return espree.parse(source, options);
+function getSyntaxTree (source, parserOptions) {
+    return parser.parse(source, parserOptions);
 }
 
 function performAnalysis (ast, options) {
     return core.analyse(ast, walker, options);
 }
 
-function analyseSource (source, options) {
-    return performAnalysis(getSyntaxTree(source), options);
+function analyseSource (source, options, parserOptions) {
+    return performAnalysis(getSyntaxTree(source, parserOptions), options);
 }

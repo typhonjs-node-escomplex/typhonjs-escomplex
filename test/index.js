@@ -106,24 +106,12 @@ suite('index:', function () {
                 assert.strictEqual(log.args['parser.parse'][0][0], 'console.log("foo");');
             });
 
-            test('parser.parse was given correct options first time', function () {
-                assert.isObject(log.args['parser.parse'][0][1]);
-                assert.isTrue(log.args['parser.parse'][0][1].loc);
-                assert.lengthOf(Object.keys(log.args['parser.parse'][0][1]), 3);
-            });
-
             test('parser.parse was passed two arguments second time', function () {
                 assert.lengthOf(log.args['parser.parse'][1], 2);
             });
 
             test('parser.parse was given correct source second time', function () {
                 assert.strictEqual(log.args['parser.parse'][1][0], '"bar";');
-            });
-
-            test('parser.parse was given correct options second time', function () {
-                assert.isObject(log.args['parser.parse'][1][1]);
-                assert.isTrue(log.args['parser.parse'][1][1].loc);
-                assert.lengthOf(Object.keys(log.args['parser.parse'][1][1]), 3);
             });
 
             test('core.analyse was called once', function () {
@@ -213,12 +201,6 @@ suite('index:', function () {
                 assert.strictEqual(log.args['parser.parse'][0][0], 'foo bar baz');
             });
 
-            test('parser.parse was given correct options', function () {
-                assert.isObject(log.args['parser.parse'][0][1]);
-                assert.isTrue(log.args['parser.parse'][0][1].loc);
-                assert.lengthOf(Object.keys(log.args['parser.parse'][0][1]), 3);
-            });
-
             test('core.analyse was called once', function () {
                 assert.strictEqual(log.counts['core.analyse'], 1);
             });
@@ -267,13 +249,6 @@ suite('index:', function () {
 
             test('parser.parse was given correct source', function () {
                 assert.strictEqual(log.args['parser.parse'][0][0], 'import foo from "./foo.js"; const s_BAR = 42; export default s_BAR;');
-            });
-
-            test('parser.parse was given correct options', function () {
-                assert.isObject(log.args['parser.parse'][0][1]);
-                assert.isTrue(log.args['parser.parse'][0][1].loc);
-                assert.strictEqual(log.args['parser.parse'][0][1].sourceType, 'module');
-                assert.lengthOf(Object.keys(log.args['parser.parse'][0][1]), 4);
             });
 
             test('core.analyse was called once', function () {

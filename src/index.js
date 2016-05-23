@@ -1,9 +1,9 @@
 /*globals require, exports */
 'use strict';
 
-var espree = require('espree');
+var espree = require('./parser');
 
-var core = require('escomplex-core/src/core');
+var core = require('./core');
 var walker = require('escomplex-core/src/walker');
 
 var esmRegex = /(^\s*|[}\);\n]\s*)(import\s*(['"]|(\*\s+as\s+)?[^"'\(\)\n;]+\s*from\s*['"]|\{)|export\s+\*\s+from\s+["']|export\s* (\{|default|function|class|var|const|let|async\s+function))/;

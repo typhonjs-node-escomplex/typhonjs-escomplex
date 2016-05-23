@@ -9,7 +9,6 @@ spooks = require('spooks');
 modulePath = '../src';
 
 mockery.registerAllowable(modulePath);
-mockery.registerAllowable('check-types');
 
 suite('index:', function () {
     var log, walker;
@@ -18,15 +17,15 @@ suite('index:', function () {
         log = {};
         walker = {};
         mockery.enable({ useCleanCache: true });
-        mockery.registerMock('espree', {
+        mockery.registerMock('./parser', {
             parse: spooks.fn({
-                name: 'espree.parse',
+                name: 'parser.parse',
                 log: log,
-                results: [ 'espree.parse result' ]
+                results: [ 'parser.parse result' ]
             })
         });
         mockery.registerMock('escomplex-core/src/walker', walker);
-        mockery.registerMock('escomplex-core/src/core', {
+        mockery.registerMock('./core', {
             analyse: spooks.fn({
                 name: 'core.analyse',
                 log: log,
@@ -36,9 +35,9 @@ suite('index:', function () {
     });
 
     teardown(function () {
-        mockery.deregisterMock('espree');
+        mockery.deregisterMock('./parser');
         mockery.deregisterMock('escomplex-core/src/walker');
-        mockery.deregisterMock('escomplex-core/src/core');
+        mockery.deregisterMock('./core');
         mockery.disable();
         log = walker = undefined;
     });
@@ -74,8 +73,8 @@ suite('index:', function () {
             });
         });
 
-        test('espree.parse was not called', function () {
-            assert.strictEqual(log.counts['espree.parse'], 0);
+        test('parser.parse was not called', function () {
+            assert.strictEqual(log.counts['parser.parse'], 0);
         });
 
         test('core.analyse was not called', function () {
@@ -95,36 +94,36 @@ suite('index:', function () {
                 options = result = undefined;
             });
 
-            test('espree.parse was called twice', function () {
-                assert.strictEqual(log.counts['espree.parse'], 2);
+            test('parser.parse was called twice', function () {
+                assert.strictEqual(log.counts['parser.parse'], 2);
             });
 
-            test('espree.parse was passed two arguments first time', function () {
-                assert.lengthOf(log.args['espree.parse'][0], 2);
+            test('parser.parse was passed two arguments first time', function () {
+                assert.lengthOf(log.args['parser.parse'][0], 2);
             });
 
-            test('espree.parse was given correct source first time', function () {
-                assert.strictEqual(log.args['espree.parse'][0][0], 'console.log("foo");');
+            test('parser.parse was given correct source first time', function () {
+                assert.strictEqual(log.args['parser.parse'][0][0], 'console.log("foo");');
             });
 
-            test('espree.parse was given correct options first time', function () {
-                assert.isObject(log.args['espree.parse'][0][1]);
-                assert.isTrue(log.args['espree.parse'][0][1].loc);
-                assert.lengthOf(Object.keys(log.args['espree.parse'][0][1]), 3);
+            test('parser.parse was given correct options first time', function () {
+                assert.isObject(log.args['parser.parse'][0][1]);
+                assert.isTrue(log.args['parser.parse'][0][1].loc);
+                assert.lengthOf(Object.keys(log.args['parser.parse'][0][1]), 3);
             });
 
-            test('espree.parse was passed two arguments second time', function () {
-                assert.lengthOf(log.args['espree.parse'][1], 2);
+            test('parser.parse was passed two arguments second time', function () {
+                assert.lengthOf(log.args['parser.parse'][1], 2);
             });
 
-            test('espree.parse was given correct source second time', function () {
-                assert.strictEqual(log.args['espree.parse'][1][0], '"bar";');
+            test('parser.parse was given correct source second time', function () {
+                assert.strictEqual(log.args['parser.parse'][1][0], '"bar";');
             });
 
-            test('espree.parse was given correct options second time', function () {
-                assert.isObject(log.args['espree.parse'][1][1]);
-                assert.isTrue(log.args['espree.parse'][1][1].loc);
-                assert.lengthOf(Object.keys(log.args['espree.parse'][1][1]), 3);
+            test('parser.parse was given correct options second time', function () {
+                assert.isObject(log.args['parser.parse'][1][1]);
+                assert.isTrue(log.args['parser.parse'][1][1].loc);
+                assert.lengthOf(Object.keys(log.args['parser.parse'][1][1]), 3);
             });
 
             test('core.analyse was called once', function () {
@@ -141,12 +140,12 @@ suite('index:', function () {
 
                 assert.isObject(log.args['core.analyse'][0][0][0]);
                 assert.strictEqual(log.args['core.analyse'][0][0][0].path, '/foo.js');
-                assert.strictEqual(log.args['core.analyse'][0][0][0].ast, 'espree.parse result');
+                assert.strictEqual(log.args['core.analyse'][0][0][0].ast, 'parser.parse result');
                 assert.lengthOf(Object.keys(log.args['core.analyse'][0][0][0]), 2);
 
                 assert.isObject(log.args['core.analyse'][0][0][1]);
                 assert.strictEqual(log.args['core.analyse'][0][0][1].path, '../bar.js');
-                assert.strictEqual(log.args['core.analyse'][0][0][1].ast, 'espree.parse result');
+                assert.strictEqual(log.args['core.analyse'][0][0][1].ast, 'parser.parse result');
                 assert.lengthOf(Object.keys(log.args['core.analyse'][0][0][1]), 2);
             });
 
@@ -202,22 +201,22 @@ suite('index:', function () {
                 options = result = undefined;
             });
 
-            test('espree.parse was called once', function () {
-                assert.strictEqual(log.counts['espree.parse'], 1);
+            test('parser.parse was called once', function () {
+                assert.strictEqual(log.counts['parser.parse'], 1);
             });
 
-            test('espree.parse was passed two arguments', function () {
-                assert.lengthOf(log.args['espree.parse'][0], 2);
+            test('parser.parse was passed two arguments', function () {
+                assert.lengthOf(log.args['parser.parse'][0], 2);
             });
 
-            test('espree.parse was given correct source', function () {
-                assert.strictEqual(log.args['espree.parse'][0][0], 'foo bar baz');
+            test('parser.parse was given correct source', function () {
+                assert.strictEqual(log.args['parser.parse'][0][0], 'foo bar baz');
             });
 
-            test('espree.parse was given correct options', function () {
-                assert.isObject(log.args['espree.parse'][0][1]);
-                assert.isTrue(log.args['espree.parse'][0][1].loc);
-                assert.lengthOf(Object.keys(log.args['espree.parse'][0][1]), 3);
+            test('parser.parse was given correct options', function () {
+                assert.isObject(log.args['parser.parse'][0][1]);
+                assert.isTrue(log.args['parser.parse'][0][1].loc);
+                assert.lengthOf(Object.keys(log.args['parser.parse'][0][1]), 3);
             });
 
             test('core.analyse was called once', function () {
@@ -229,7 +228,7 @@ suite('index:', function () {
             });
 
             test('core.analyse was given correct ast', function () {
-                assert.strictEqual(log.args['core.analyse'][0][0], 'espree.parse result');
+                assert.strictEqual(log.args['core.analyse'][0][0], 'parser.parse result');
             });
 
             test('core.analyse was given correct walker', function () {
@@ -258,23 +257,23 @@ suite('index:', function () {
                 options = result = undefined;
             });
 
-            test('espree.parse was called once', function () {
-                assert.strictEqual(log.counts['espree.parse'], 1);
+            test('parser.parse was called once', function () {
+                assert.strictEqual(log.counts['parser.parse'], 1);
             });
 
-            test('espree.parse was passed two arguments', function () {
-                assert.lengthOf(log.args['espree.parse'][0], 2);
+            test('parser.parse was passed two arguments', function () {
+                assert.lengthOf(log.args['parser.parse'][0], 2);
             });
 
-            test('espree.parse was given correct source', function () {
-                assert.strictEqual(log.args['espree.parse'][0][0], 'import foo from "./foo.js"; const s_BAR = 42; export default s_BAR;');
+            test('parser.parse was given correct source', function () {
+                assert.strictEqual(log.args['parser.parse'][0][0], 'import foo from "./foo.js"; const s_BAR = 42; export default s_BAR;');
             });
 
-            test('espree.parse was given correct options', function () {
-                assert.isObject(log.args['espree.parse'][0][1]);
-                assert.isTrue(log.args['espree.parse'][0][1].loc);
-                assert.strictEqual(log.args['espree.parse'][0][1].sourceType, 'module');
-                assert.lengthOf(Object.keys(log.args['espree.parse'][0][1]), 4);
+            test('parser.parse was given correct options', function () {
+                assert.isObject(log.args['parser.parse'][0][1]);
+                assert.isTrue(log.args['parser.parse'][0][1].loc);
+                assert.strictEqual(log.args['parser.parse'][0][1].sourceType, 'module');
+                assert.lengthOf(Object.keys(log.args['parser.parse'][0][1]), 4);
             });
 
             test('core.analyse was called once', function () {
@@ -286,7 +285,7 @@ suite('index:', function () {
             });
 
             test('core.analyse was given correct ast', function () {
-                assert.strictEqual(log.args['core.analyse'][0][0], 'espree.parse result');
+                assert.strictEqual(log.args['core.analyse'][0][0], 'parser.parse result');
             });
 
             test('core.analyse was given correct walker', function () {

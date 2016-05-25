@@ -154,7 +154,7 @@ suite('index:', function () {
             var code;
 
             setup(function () {
-                mockery.deregisterMock('espree');
+                mockery.deregisterMock('./parser');
                 mockery.disable();
                 code = [ { path: '/foo.js', code: 'foo foo' }, { path: '../bar.js', code: '"bar";' } ];
                 index = require(modulePath);
@@ -167,7 +167,7 @@ suite('index:', function () {
             test('throws an error with default options', function() {
                 assert.throws(function() {
                     index.analyse(code, {});
-                }, '/foo.js: Unexpected token foo');
+                }, '/foo.js: Unexpected token (1:4)');
             });
 
             test('swallows error with options.ignoreErrors', function() {

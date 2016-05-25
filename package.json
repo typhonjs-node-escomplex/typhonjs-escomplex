@@ -45,8 +45,8 @@
     "metrics"
   ],
   "dependencies": {
-    "escomplex-core": "git+https://git@github.com/typhonjs-node-escomplex/escomplex-core.git",
-    "espree": "^3.0.0"
+    "babylon": "^6.0.0",
+    "escomplex-core": "git+https://git@github.com/typhonjs-node-escomplex/escomplex-core.git"
   },
   "devDependencies": {
     "chai": "^3.0.0",

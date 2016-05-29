@@ -4,7 +4,7 @@
   "description": "Software complexity analysis of JavaScript-family abstract syntax trees.",
   "homepage": "https://github.com/jared-stilwell/escomplex",
   "bugs": "https://github.com/jared-stilwell/escomplex/issues",
-  "license": "MIT",
+  "license": "MPL-2.0",
   "author": "Phil Booth <pmbooth@gmail.com> (https://github.com/philbooth)",
   "main": "./src",
   "repository": {

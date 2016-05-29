@@ -12,7 +12,7 @@ function analyse (source, options, parserOptions) {
         return analyseSources(source, options, parserOptions);
     }
 
-    return typeof source === 'string' ? analyseSource(source, options, parserOptions) : void 0;
+    return analyseSource(source, options, parserOptions);
 }
 
 function analyseSources (sources, options, parserOptions) {

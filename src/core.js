@@ -19,16 +19,15 @@ module.exports.processResults = processResults;
  *
  * @param ast {object|array}  The abstract syntax tree(s) to analyse for
  *                            code complexity.
- * @param walker {object}     The AST walker to use against `ast`.
  * @param [options] {object}  Options to modify the complexity calculation.
  *
  */
-function analyse (ast, walker, options) {
+function analyse (ast, options) {
     if (Array.isArray(ast)) {
-        return projectHandler.analyse(ast, walker, options);
+        return projectHandler.analyse(ast, options);
     }
 
-    return moduleHandler.analyse(ast, walker, options);
+    return moduleHandler.analyse(ast, options);
 }
 
 /**

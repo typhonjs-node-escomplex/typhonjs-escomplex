@@ -10,7 +10,7 @@ exports.processResults = processResults;
 path = require('path');
 moduleAnalyser = require('escomplex-core/src/module');
 
-function analyse (modules, walker, options) {
+function analyse (modules, options) {
     // TODO: Asynchronize.
 
     var reports;
@@ -24,7 +24,7 @@ function analyse (modules, walker, options) {
         if (m.path === '') { throw new Error('Invalid path'); }
 
         try {
-            report = moduleAnalyser.analyse(m.ast, walker, options);
+            report = moduleAnalyser.analyse(m.ast, options);
 
             report.path = m.path;
 

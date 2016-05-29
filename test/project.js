@@ -5,7 +5,6 @@
 var assert = require('chai').assert;
 
 var parser = require('../src/parser');
-var mozWalker = require('escomplex-core/src/walker');
 
 var modulePath = '../src/project';
 
@@ -51,13 +50,13 @@ suite('project:', function () {
                             line: 0
                         }
                     }
-                }, mozWalker);
+                });
             });
         });
 
         test('analyse does not throw when modules is array', function () {
             assert.doesNotThrow(function () {
-                cr.analyse([], mozWalker);
+                cr.analyse([]);
             });
         });
 
@@ -65,7 +64,7 @@ suite('project:', function () {
             var result;
 
             setup(function () {
-                result = cr.analyse([], mozWalker);
+                result = cr.analyse([]);
             });
 
             teardown(function () {
@@ -135,7 +134,7 @@ suite('project:', function () {
                         path: 'b'
                     },
                     {ast: parser.parse('if (true) { "foo"; } else { "bar"; }'), path: 'a'}
-                ], mozWalker);
+                ]);
             });
 
             teardown(function () {
@@ -296,7 +295,7 @@ suite('project:', function () {
                     ast: parser.parse('if (true) { "foo"; } else { "bar"; }'),
                     path: 'a'
                 });
-                reportsOnly = cr.analyse(modules, mozWalker, {skipCalculation: true});
+                reportsOnly = cr.analyse(modules, {skipCalculation: true});
             });
 
             test('should not have aggregates if we call with skipCalculation', function () {
@@ -304,7 +303,7 @@ suite('project:', function () {
             });
 
             test('should not have coreSize or visibilityMatrix if we call with noCoreSize', function () {
-                var results = cr.analyse(modules, mozWalker, {noCoreSize: true});
+                var results = cr.analyse(modules, {noCoreSize: true});
                 assert.notOk(results.coreSize);
                 assert.notOk(results.visibilityMatrix);
                 // make sure we still have a few things though
@@ -314,7 +313,7 @@ suite('project:', function () {
 
             test('should be able to run processResults', function () {
                 var fullReport, calcReport;
-                fullReport = cr.analyse(modules, mozWalker);
+                fullReport = cr.analyse(modules);
                 calcReport = cr.processResults(reportsOnly);
                 assert.deepEqual(calcReport, fullReport);
             });
@@ -339,7 +338,7 @@ suite('project:', function () {
                     {ast: parser.parse('require("./b");"c";'), path: '/a/c.js'},
                     {ast: parser.parse('require("./c");"b";'), path: '/a/b.js'},
                     {ast: parser.parse('require("./a/b");require("./a/c");"a";'), path: '/a.js'}
-                ], mozWalker);
+                ]);
             });
 
             teardown(function () {
@@ -405,7 +404,7 @@ suite('project:', function () {
                     {ast: parser.parse('require("./c/e");"c";'), path: '/a/c.js'},
                     {ast: parser.parse('require("./b/d");"b";'), path: '/a/b.js'},
                     {ast: parser.parse('require("./a/b");require("./a/c");"a";'), path: '/a.js'}
-                ], mozWalker);
+                ]);
             });
 
             teardown(function () {

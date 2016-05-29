@@ -4,7 +4,6 @@
 var parser = require('./parser');
 
 var core = require('./core');
-var walker = require('escomplex-core/src/walker');
 
 exports.analyse = analyse;
 
@@ -50,7 +49,7 @@ function getSyntaxTree (source, parserOptions) {
 }
 
 function performAnalysis (ast, options) {
-    return core.analyse(ast, walker, options);
+    return core.analyse(ast, options);
 }
 
 function analyseSource (source, options, parserOptions) {

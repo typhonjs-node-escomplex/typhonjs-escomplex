@@ -479,7 +479,7 @@ first.
 
 ## License
 
-[MIT][license]
+[MPLv2][license]
 
 [ci-image]: https://secure.travis-ci.org/jared-stilwell/escomplex.png?branch=master
 [ci-status]: http://travis-ci.org/#!/jared-stilwell/escomplex
@@ -509,4 +509,4 @@ first.
 [karma]: https://github.com/lorenzofox3/karma-complexity-preprocessor
 [crlint]: https://github.com/spion/crlint.js
 [contributions]: https://github.com/jared-stilwell/escomplex/blob/master/CONTRIBUTING.md
-[license]: https://github.com/jared-stilwell/escomplex/blob/master/COPYING
+[license]: https://github.com/typhonjs-node-escomplex/escomplex/blob/master/LICENSE

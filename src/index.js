@@ -26,10 +26,17 @@ function analyseSources (sources, options, parserOptions) {
 
 function mapSource (options, parserOptions, source) {
     try {
-        return {
-            path: source.path,
-            ast: getSyntaxTree(source.code, parserOptions)
-        };
+        if (source.ast) {
+            return {
+                path: source.path,
+                ast: source.ast
+            };
+        } else if (source.code) {
+            return {
+                path: source.path,
+                ast: getSyntaxTree(source.code, parserOptions)
+            };
+        }
     } catch (error) {
         if (options.ignoreErrors) {
             return null;
@@ -53,5 +60,13 @@ function performAnalysis (ast, options) {
 }
 
 function analyseSource (source, options, parserOptions) {
-    return performAnalysis(getSyntaxTree(source, parserOptions), options);
+    if (typeof source === 'string') {
+        return performAnalysis(getSyntaxTree(source, parserOptions), options);
+    } else if (typeof source === 'object') {
+        return performAnalysis(source, options);
+    } else {
+        throw new Error('Invalid source');
+    }
+
+
 }

@@ -20,12 +20,12 @@ module.exports.processResults = processResults;
  * @param [options] {object}  Options to modify the complexity calculation.
  *
  */
-function analyse (ast, options) {
-    if (Array.isArray(ast)) {
-        return projectHandler.analyse(ast, options);
-    }
+function analyse(ast, options) {
+  if (Array.isArray(ast)) {
+    return projectHandler.analyse(ast, options);
+  }
 
-    return moduleHandler.analyse(ast, options);
+  return moduleHandler.analyse(ast, options);
 }
 
 /**
@@ -38,5 +38,5 @@ function analyse (ast, options) {
  *
  */
 function processResults(report, noCoreSize) {
-    return projectHandler.processResults(report, noCoreSize);
+  return projectHandler.processResults(report, noCoreSize);
 }

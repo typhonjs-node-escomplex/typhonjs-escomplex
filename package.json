@@ -2,16 +2,21 @@
   "name": "escomplex",
   "version": "2.0.0",
   "description": "Software complexity analysis of JavaScript-family abstract syntax trees.",
-  "homepage": "https://github.com/jared-stilwell/escomplex",
-  "bugs": "https://github.com/jared-stilwell/escomplex/issues",
+  "homepage": "https://github.com/typhonjs-node-escomplex/escomplex",
+  "bugs": "https://github.com/typhonjs-node-escomplex/escomplex/issues",
   "license": "MPL-2.0",
   "author": "Phil Booth <pmbooth@gmail.com> (https://github.com/philbooth)",
-  "main": "./src",
+  "main": "./dist",
   "repository": {
     "type": "git",
-    "url": "https://github.com/jared-stilwell/escomplex.git"
+    "url": "https://github.com/typhonjs-node-escomplex/escomplex.git"
   },
   "maintainers": [
+    {
+      "name": "Mike Leahy",
+      "email": "support@typhonjs.io",
+      "url": "https://github.com/typhonrt"
+    },
     {
       "name": "Jared Stilwell",
       "email": "jared.k.stilwell@gmail.com",
@@ -19,10 +24,6 @@
     }
   ],
   "contributors": [
-    {
-      "name": "Michael Leahy",
-      "url": "https://github.com/typhonrt"
-    },
     {
       "name": "Will Boyd",
       "url": "https://github.com/lonekorean"
@@ -49,15 +50,21 @@
     "escomplex-core": "git+https://git@github.com/typhonjs-node-escomplex/escomplex-core.git"
   },
   "devDependencies": {
-    "chai": "^3.0.0",
-    "eslint": "^2.0.0",
-    "mocha": "^2.0.0",
+    "babel-plugin-add-module-exports": "^0.2.0",
+    "babel-plugin-module-alias": "^1.0.0",
     "mockery": "^1.0.0",
     "snyk": "^1.0.0",
-    "spooks": "2.0.0"
+    "spooks": "2.0.0",
+    "typhonjs-config-eslint": "^0.4.0",
+    "typhonjs-npm-build-test": "^0.1.0"
   },
   "scripts": {
-    "lint": "eslint test src",
-    "test": "snyk test --dev && mocha --ui tdd --reporter spec --colors"
+    "build": "babel-node ./node_modules/typhonjs-npm-scripts-build-babel/scripts/build.js",
+    "esdoc": "esdoc -c .esdocrc",
+    "eslint": "eslint .",
+    "prepublish": "babel-node ./node_modules/typhonjs-npm-scripts-publish/scripts/prepublish.js",
+    "test": "babel-node ./node_modules/typhonjs-npm-scripts-test-mocha/scripts/mocha.js",
+    "test-coverage": "babel-node ./node_modules/typhonjs-npm-scripts-test-mocha/scripts/mocha-istanbul.js",
+    "snyk": "snyk test --dev"
   }
 }

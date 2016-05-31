@@ -4,9 +4,9 @@
 
 var assert = require('chai').assert;
 
-var parser = require('../src/parser');
+var parser = require('../../src/parser');
 
-var modulePath = '../src/project';
+var modulePath = '../../src/project';
 
 suite('project:', function () {
     test('require does not throw', function () {
@@ -621,7 +621,7 @@ suite('project:', function () {
         suite('large project calculation performance and accuracy', function () {
             var resultFixture;
             setup(function () {
-                resultFixture = require('./fixture/ast_moz');
+                resultFixture = require('../fixture/ast_moz');
             });
 
             test('running calculations should be sufficently fast', function () {

@@ -1,0 +1,13 @@
+{
+   "title": "escomplex",
+   "source": "src",
+   "destination": "docs",
+
+   "manual": { "changelog": ["./CHANGELOG.md"] },
+
+   "test":
+   {
+      "type": "mocha",
+      "source": "./test/src"
+   }
+}

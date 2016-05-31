@@ -6,7 +6,7 @@ var core = require('./core');
 
 exports.analyse = analyse;
 
-function analyse (source, options, parserOptions) {
+function analyse(source, options, parserOptions) {
     if (Array.isArray(source)) {
         return analyseSources(source, options, parserOptions);
     }
@@ -14,16 +14,11 @@ function analyse (source, options, parserOptions) {
     return analyseSource(source, options, parserOptions);
 }
 
-function analyseSources (sources, options, parserOptions) {
-    return performAnalysis(
-        sources.map(
-            mapSource.bind(null, options, parserOptions)
-        ).filter(filterSource),
-        options
-    );
+function analyseSources(sources, options, parserOptions) {
+    return performAnalysis(sources.map(mapSource.bind(null, options, parserOptions)).filter(filterSource), options);
 }
 
-function mapSource (options, parserOptions, source) {
+function mapSource(options, parserOptions, source) {
     try {
         return {
             path: source.path,
@@ -39,18 +34,18 @@ function mapSource (options, parserOptions, source) {
     }
 }
 
-function filterSource (source) {
+function filterSource(source) {
     return !!source;
 }
 
-function getSyntaxTree (source, parserOptions) {
+function getSyntaxTree(source, parserOptions) {
     return parser.parse(source, parserOptions);
 }
 
-function performAnalysis (ast, options) {
+function performAnalysis(ast, options) {
     return core.analyse(ast, options);
 }
 
-function analyseSource (source, options, parserOptions) {
+function analyseSource(source, options, parserOptions) {
     return performAnalysis(getSyntaxTree(source, parserOptions), options);
 }

@@ -27,10 +27,10 @@ suite('index:', function () {
             })
         });
         mockery.registerMock('./core', {
-            analyse: spooks.fn({
-                name: 'core.analyse',
+            analyze: spooks.fn({
+                name: 'core.analyze',
                 log: log,
-                results: [ 'core.analyse result' ]
+                results: [ 'core.analyze result' ]
             })
         });
     });
@@ -63,13 +63,13 @@ suite('index:', function () {
             index = undefined;
         });
 
-        test('analyse function is exported', function () {
-            assert.isFunction(index.analyse);
+        test('analyze function is exported', function () {
+            assert.isFunction(index.analyze);
         });
 
-        test('analyse does not throw', function () {
+        test('analyze does not throw', function () {
             assert.doesNotThrow(function () {
-                index.analyse();
+                index.analyze();
             });
         });
 
@@ -77,8 +77,8 @@ suite('index:', function () {
             assert.strictEqual(log.counts['parser.parse'], 0);
         });
 
-        test('core.analyse was not called', function () {
-            assert.strictEqual(log.counts['core.analyse'], 0);
+        test('core.analyze was not called', function () {
+            assert.strictEqual(log.counts['core.analyze'], 0);
         });
 
         suite('array source:', function () {
@@ -86,7 +86,7 @@ suite('index:', function () {
 
             setup(function () {
                 options = {};
-                result = index.analyse([ { path: '/foo.js', code: 'console.log("foo");' },
+                result = index.analyze([ { path: '/foo.js', code: 'console.log("foo");' },
                     { path: '../bar.js', code: '"bar";' } ], options);
             });
 
@@ -114,35 +114,35 @@ suite('index:', function () {
                 assert.strictEqual(log.args['parser.parse'][1][0], '"bar";');
             });
 
-            test('core.analyse was called once', function () {
-                assert.strictEqual(log.counts['core.analyse'], 1);
+            test('core.analyze was called once', function () {
+                assert.strictEqual(log.counts['core.analyze'], 1);
             });
 
-            test('core.analyse was passed two arguments', function () {
-                assert.lengthOf(log.args['core.analyse'][0], 2);
+            test('core.analyze was passed two arguments', function () {
+                assert.lengthOf(log.args['core.analyze'][0], 2);
             });
 
-            test('core.analyse was given correct asts', function () {
-                assert.isArray(log.args['core.analyse'][0][0]);
-                assert.lengthOf(log.args['core.analyse'][0][0], 2);
+            test('core.analyze was given correct asts', function () {
+                assert.isArray(log.args['core.analyze'][0][0]);
+                assert.lengthOf(log.args['core.analyze'][0][0], 2);
 
-                assert.isObject(log.args['core.analyse'][0][0][0]);
-                assert.strictEqual(log.args['core.analyse'][0][0][0].path, '/foo.js');
-                assert.strictEqual(log.args['core.analyse'][0][0][0].ast, 'parser.parse result');
-                assert.lengthOf(Object.keys(log.args['core.analyse'][0][0][0]), 2);
+                assert.isObject(log.args['core.analyze'][0][0][0]);
+                assert.strictEqual(log.args['core.analyze'][0][0][0].path, '/foo.js');
+                assert.strictEqual(log.args['core.analyze'][0][0][0].ast, 'parser.parse result');
+                assert.lengthOf(Object.keys(log.args['core.analyze'][0][0][0]), 2);
 
-                assert.isObject(log.args['core.analyse'][0][0][1]);
-                assert.strictEqual(log.args['core.analyse'][0][0][1].path, '../bar.js');
-                assert.strictEqual(log.args['core.analyse'][0][0][1].ast, 'parser.parse result');
-                assert.lengthOf(Object.keys(log.args['core.analyse'][0][0][1]), 2);
+                assert.isObject(log.args['core.analyze'][0][0][1]);
+                assert.strictEqual(log.args['core.analyze'][0][0][1].path, '../bar.js');
+                assert.strictEqual(log.args['core.analyze'][0][0][1].ast, 'parser.parse result');
+                assert.lengthOf(Object.keys(log.args['core.analyze'][0][0][1]), 2);
             });
 
-            test('core.analyse was given correct options', function () {
-                assert.strictEqual(log.args['core.analyse'][0][1], options);
+            test('core.analyze was given correct options', function () {
+                assert.strictEqual(log.args['core.analyze'][0][1], options);
             });
 
             test('correct result was returned', function () {
-                assert.strictEqual(result, 'core.analyse result');
+                assert.strictEqual(result, 'core.analyze result');
             });
         });
 
@@ -162,13 +162,13 @@ suite('index:', function () {
 
             test('throws an error with default options', function() {
                 assert.throws(function() {
-                    index.analyse(code, {});
+                    index.analyze(code, {});
                 }, '/foo.js: Unexpected token (1:4)');
             });
 
             test('swallows error with options.ignoreErrors', function() {
                 assert.doesNotThrow(function() {
-                    index.analyse(code, { ignoreErrors: true });
+                    index.analyze(code, { ignoreErrors: true });
                 });
             });
         });
@@ -178,7 +178,7 @@ suite('index:', function () {
 
             setup(function () {
                 options = {};
-                result = index.analyse('foo bar baz', options);
+                result = index.analyze('foo bar baz', options);
             });
 
             teardown(function () {
@@ -197,24 +197,24 @@ suite('index:', function () {
                 assert.strictEqual(log.args['parser.parse'][0][0], 'foo bar baz');
             });
 
-            test('core.analyse was called once', function () {
-                assert.strictEqual(log.counts['core.analyse'], 1);
+            test('core.analyze was called once', function () {
+                assert.strictEqual(log.counts['core.analyze'], 1);
             });
 
-            test('core.analyse was passed two arguments', function () {
-                assert.lengthOf(log.args['core.analyse'][0], 2);
+            test('core.analyze was passed two arguments', function () {
+                assert.lengthOf(log.args['core.analyze'][0], 2);
             });
 
-            test('core.analyse was given correct ast', function () {
-                assert.strictEqual(log.args['core.analyse'][0][0], 'parser.parse result');
+            test('core.analyze was given correct ast', function () {
+                assert.strictEqual(log.args['core.analyze'][0][0], 'parser.parse result');
             });
 
-            test('core.analyse was given correct options', function () {
-                assert.strictEqual(log.args['core.analyse'][0][1], options);
+            test('core.analyze was given correct options', function () {
+                assert.strictEqual(log.args['core.analyze'][0][1], options);
             });
 
             test('correct result was returned', function () {
-                assert.strictEqual(result, 'core.analyse result');
+                assert.strictEqual(result, 'core.analyze result');
             });
         });
 
@@ -224,7 +224,7 @@ suite('index:', function () {
             setup(function () {
                 options = {};
 
-                result = index.analyse('import foo from "./foo.js"; const s_BAR = 42; export default s_BAR;', options);
+                result = index.analyze('import foo from "./foo.js"; const s_BAR = 42; export default s_BAR;', options);
             });
 
             teardown(function () {
@@ -243,24 +243,24 @@ suite('index:', function () {
                 assert.strictEqual(log.args['parser.parse'][0][0], 'import foo from "./foo.js"; const s_BAR = 42; export default s_BAR;');
             });
 
-            test('core.analyse was called once', function () {
-                assert.strictEqual(log.counts['core.analyse'], 1);
+            test('core.analyze was called once', function () {
+                assert.strictEqual(log.counts['core.analyze'], 1);
             });
 
-            test('core.analyse was passed three arguments', function () {
-                assert.lengthOf(log.args['core.analyse'][0], 2);
+            test('core.analyze was passed three arguments', function () {
+                assert.lengthOf(log.args['core.analyze'][0], 2);
             });
 
-            test('core.analyse was given correct ast', function () {
-                assert.strictEqual(log.args['core.analyse'][0][0], 'parser.parse result');
+            test('core.analyze was given correct ast', function () {
+                assert.strictEqual(log.args['core.analyze'][0][0], 'parser.parse result');
             });
 
-            test('core.analyse was given correct options', function () {
-                assert.strictEqual(log.args['core.analyse'][0][1], options);
+            test('core.analyze was given correct options', function () {
+                assert.strictEqual(log.args['core.analyze'][0][1], options);
             });
 
             test('correct result was returned', function () {
-                assert.strictEqual(result, 'core.analyse result');
+                assert.strictEqual(result, 'core.analyze result');
             });
         });
     });

@@ -4,17 +4,17 @@ var parser = require('./parser');
 
 var core = require('./core');
 
-exports.analyse = analyse;
+exports.analyze = analyze;
 
-function analyse (source, options, parserOptions) {
+function analyze (source, options, parserOptions) {
     if (Array.isArray(source)) {
-        return analyseSources(source, options, parserOptions);
+        return analyzeSources(source, options, parserOptions);
     }
 
-    return analyseSource(source, options, parserOptions);
+    return analyzeSource(source, options, parserOptions);
 }
 
-function analyseSources (sources, options, parserOptions) {
+function analyzeSources (sources, options, parserOptions) {
     return performAnalysis(
         sources.map(
             mapSource.bind(null, options, parserOptions)
@@ -48,9 +48,9 @@ function getSyntaxTree (source, parserOptions) {
 }
 
 function performAnalysis (ast, options) {
-    return core.analyse(ast, options);
+    return core.analyze(ast, options);
 }
 
-function analyseSource (source, options, parserOptions) {
+function analyzeSource (source, options, parserOptions) {
     return performAnalysis(getSyntaxTree(source, parserOptions), options);
 }

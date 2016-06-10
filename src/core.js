@@ -5,27 +5,27 @@
 'use strict';
 
 var projectHandler = require('./project');
-var moduleHandler = require('escomplex-core');
+var moduleHandler = require('typhonjs-escomplex-module');
 
-module.exports.analyse = analyse;
+module.exports.analyze = analyze;
 module.exports.processResults = processResults;
 
 /**
- * Public function `analyse`.
+ * Public function `analyze`.
  *
  * Returns an object detailing the complexity of abstract syntax tree(s).
  *
- * @param ast {object|array}  The abstract syntax tree(s) to analyse for
+ * @param ast {object|array}  The abstract syntax tree(s) to analyze for
  *                            code complexity.
  * @param [options] {object}  Options to modify the complexity calculation.
  *
  */
-function analyse (ast, options) {
+function analyze (ast, options) {
     if (Array.isArray(ast)) {
-        return projectHandler.analyse(ast, options);
+        return projectHandler.analyze(ast, options);
     }
 
-    return moduleHandler.analyse(ast, options);
+    return moduleHandler.analyze(ast, options);
 }
 
 /**

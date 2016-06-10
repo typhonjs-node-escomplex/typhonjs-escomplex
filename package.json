@@ -1,9 +1,9 @@
 {
-  "name": "escomplex",
-  "version": "2.0.0",
-  "description": "Software complexity analysis of JavaScript-family abstract syntax trees.",
-  "homepage": "https://github.com/typhonjs-node-escomplex/escomplex",
-  "bugs": "https://github.com/typhonjs-node-escomplex/escomplex/issues",
+  "name": "typhonjs-escomplex",
+  "version": "0.0.1",
+  "description": "Next generation software complexity analysis of JavaScript-family abstract syntax trees.",
+  "homepage": "https://github.com/typhonjs-node-escomplex/typhonjs-escomplex",
+  "bugs": "https://github.com/typhonjs-node-escomplex/typhonjs-escomplex/issues",
   "license": "MPL-2.0",
   "author": {
     "name": "Mike Leahy"
@@ -11,7 +11,7 @@
   "main": "./dist",
   "repository": {
     "type": "git",
-    "url": "https://github.com/typhonjs-node-escomplex/escomplex.git"
+    "url": "https://github.com/typhonjs-node-escomplex/typhonjs-escomplex.git"
   },
   "maintainers": [
     {
@@ -21,6 +21,7 @@
     }
   ],
   "keywords": [
+    "typhonjs",
     "escomplex",
     "complexity",
     "simplicity",
@@ -30,15 +31,18 @@
     "dependencies",
     "static",
     "analysis",
-    "metrics"
+    "metrics",
+    "babylon",
+    "es6",
+    "es7"
   ],
   "dependencies": {
     "babylon": "^6.0.0",
-    "escomplex-core": "git+https://git@github.com/typhonjs-node-escomplex/escomplex-core.git"
+    "typhonjs-escomplex-module": "git+https://git@github.com/typhonjs-node-escomplex/typhonjs-escomplex-module.git"
   },
   "devDependencies": {
     "typhonjs-config-eslint": "^0.4.0",
-    "typhonjs-npm-build-test": "^0.2.0"
+    "typhonjs-npm-build-test": "^0.3.0"
   },
   "scripts": {
     "build": "babel-node ./node_modules/typhonjs-npm-scripts-build-babel/scripts/build.js",

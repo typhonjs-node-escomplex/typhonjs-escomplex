@@ -30,17 +30,17 @@ suite('project:', function () {
             cr = undefined;
         });
 
-        test('analyse function is exported', function () {
-            assert.isFunction(cr.analyse);
+        test('analyze function is exported', function () {
+            assert.isFunction(cr.analyze);
         });
 
         test('processResults function is exported', function () {
             assert.isFunction(cr.processResults);
         });
 
-        test('analyse throws when modules is object', function () {
+        test('analyze throws when modules is object', function () {
             assert.throws(function () {
-                cr.analyse({
+                cr.analyze({
                     body: [],
                     loc: {
                         start: {
@@ -54,9 +54,9 @@ suite('project:', function () {
             });
         });
 
-        test('analyse does not throw when modules is array', function () {
+        test('analyze does not throw when modules is array', function () {
             assert.doesNotThrow(function () {
-                cr.analyse([]);
+                cr.analyze([]);
             });
         });
 
@@ -64,7 +64,7 @@ suite('project:', function () {
             var result;
 
             setup(function () {
-                result = cr.analyse([]);
+                result = cr.analyze([]);
             });
 
             teardown(function () {
@@ -128,7 +128,7 @@ suite('project:', function () {
             var result;
 
             setup(function () {
-                result = cr.analyse([{ ast: parser.parse('if (true) { "foo"; } else { "bar"; }'), path: 'a' }]);
+                result = cr.analyze([{ ast: parser.parse('if (true) { "foo"; } else { "bar"; }'), path: 'a' }]);
             });
 
             teardown(function () {
@@ -258,7 +258,7 @@ suite('project:', function () {
             var result;
 
             setup(function () {
-                result = cr.analyse([
+                result = cr.analyze([
                     {
                         ast: parser.parse('function foo (a, b) { if (a) { b(a); } else { a(b); } } function bar (c, d) { var i; for (i = 0; i < c.length; i += 1) { d += 1; } console.log(d); }'),
                         path: 'b'
@@ -425,7 +425,7 @@ suite('project:', function () {
                     ast: parser.parse('if (true) { "foo"; } else { "bar"; }'),
                     path: 'a'
                 });
-                reportsOnly = cr.analyse(modules, {skipCalculation: true});
+                reportsOnly = cr.analyze(modules, {skipCalculation: true});
             });
 
             test('should not have aggregates if we call with skipCalculation', function () {
@@ -433,7 +433,7 @@ suite('project:', function () {
             });
 
             test('should not have coreSize or visibilityMatrix if we call with noCoreSize', function () {
-                var results = cr.analyse(modules, {noCoreSize: true});
+                var results = cr.analyze(modules, {noCoreSize: true});
                 assert.notOk(results.coreSize);
                 assert.notOk(results.visibilityMatrix);
                 // make sure we still have a few things though
@@ -443,7 +443,7 @@ suite('project:', function () {
 
             test('should be able to run processResults', function () {
                 var fullReport, calcReport;
-                fullReport = cr.analyse(modules);
+                fullReport = cr.analyze(modules);
                 calcReport = cr.processResults(reportsOnly);
                 assert.deepEqual(calcReport, fullReport);
             });
@@ -463,7 +463,7 @@ suite('project:', function () {
             var result;
 
             setup(function () {
-                result = cr.analyse([
+                result = cr.analyze([
                     {ast: parser.parse('require("./a");"d";'), path: '/d.js'},
                     {ast: parser.parse('require("./b");"c";'), path: '/a/c.js'},
                     {ast: parser.parse('require("./c");"b";'), path: '/a/b.js'},
@@ -527,7 +527,7 @@ suite('project:', function () {
             var result;
 
             setup(function () {
-                result = cr.analyse([
+                result = cr.analyze([
                     {ast: parser.parse('"f";'), path: '/a/c/f.js'},
                     {ast: parser.parse('require("./f");"e";'), path: '/a/c/e.js'},
                     {ast: parser.parse('"d";'), path: '/a/b/d.js'},

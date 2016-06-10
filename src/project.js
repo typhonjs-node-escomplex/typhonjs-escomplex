@@ -2,13 +2,13 @@
 
 var path, moduleAnalyser;
 
-exports.analyse = analyse;
+exports.analyze = analyze;
 exports.processResults = processResults;
 
 path = require('path');
-moduleAnalyser = require('escomplex-core');
+moduleAnalyser = require('typhonjs-escomplex-module');
 
-function analyse (modules, options) {
+function analyze (modules, options) {
     // TODO: Asynchronize.
 
     var reports;
@@ -22,7 +22,7 @@ function analyse (modules, options) {
         if (m.path === '') { throw new Error('Invalid path'); }
 
         try {
-            report = moduleAnalyser.analyse(m.ast, options);
+            report = moduleAnalyser.analyze(m.ast, options);
 
             report.path = m.path;
 

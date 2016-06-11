@@ -4,6 +4,48 @@ Please note that this is a permanent fork / rewrite of escomplex for next genera
 
 Work is swiftly being finished, so please be patient as a public launch is imminent. 
 
+More information forthcoming. This NPM module is currently not published, but can be linked to from Github as a dependency in `package.json` as follows:
+```
+"dependencies": {
+  "typhonjs-escomplex": "git+https://git@github.com/typhonjs-node-escomplex/typhonjs-escomplex.git",
+}
+```
+
+An ES6 example follows:
+```
+import escomplex from 'typhonjs-escomplex';
+
+const report = escomplex.analyze(<some JS source code>);
+
+// ------
+
+const sources = 
+[
+   { code: <some JS source code>, path: 'a/file/path/1' },
+   { code: <some JS source code>, path: 'a/file/path/2' }
+]);
+
+const results = escomplex.analyzeProject(sources);
+```
+
+
+A CJS example follows:
+```
+var escomplex = require('typhonjs-escomplex');
+
+var report = escomplex.analyze(<some JS source code>);
+
+// ------
+
+var sources = 
+[
+   { code: <some JS source code>, path: 'a/file/path/1' },
+   { code: <some JS source code>, path: 'a/file/path/2' }
+]);
+
+var results = escomplex.analyzeProject(sources);
+```
+
 ------------------
 
 Old ESComplex README info:

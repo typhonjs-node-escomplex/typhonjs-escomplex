@@ -5,7 +5,8 @@
     "add-module-exports",
     ["module-alias",
       [
-        { "src": "npm:typhonjs-escomplex-module/dist", "expose": "typhonjs-escomplex-module/src" }
+        { "src": "npm:typhonjs-escomplex-module/dist", "expose": "typhonjs-escomplex-module/src" },
+        { "src": "npm:typhonjs-escomplex-project/dist", "expose": "typhonjs-escomplex-project/src" }
       ]
     ]
   ]

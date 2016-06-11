@@ -1,5 +1,77 @@
 'use strict';
 
+import { assert } from 'chai';
+
+const modulePath = '../../dist';
+
+suite('escomplex:', () =>
+{
+   test('require does not throw', () =>
+   {
+      assert.doesNotThrow(() =>
+      {
+         require(modulePath);
+      });
+   });
+
+   suite('require:', () =>
+   {
+      let escomplex;
+
+      setup(() =>
+      {
+         escomplex = require(modulePath);
+      });
+
+      teardown(() =>
+      {
+         escomplex = undefined;
+      });
+
+      test('analyze function is exported', () =>
+      {
+         assert.isFunction(escomplex.analyze);
+      });
+
+      test('analyzeProject function is exported', () =>
+      {
+         assert.isFunction(escomplex.analyzeProject);
+      });
+
+      test('processProjectResults function is exported', () =>
+      {
+         assert.isFunction(escomplex.processProjectResults);
+      });
+
+      test('basic analyze sanity test', () =>
+      {
+         const result = escomplex.analyze('class Foo {}; class Bar extends Foo { constructor() { super(); } }');
+
+         assert.isObject(result);
+         assert.strictEqual(result.aggregate.sloc.logical, 3);
+      });
+
+      test('basic analyzeProject sanity test', () =>
+      {
+         const sources =
+         [
+            { code: 'class Foo {}; class Bar extends Foo { constructor() { super(); } }', path: '/path/to/file/a' },
+            { code: 'const iter = [2, 3, 4]; const spreadTest = [1, ...iter, 5];', path: '/path/to/file/b' }
+         ];
+
+         const results = escomplex.analyzeProject(sources);
+
+         assert.isObject(results);
+         assert.isArray(results.reports);
+         assert.strictEqual(results.reports.length, 2);
+         assert.isObject(results.reports[0]);
+         assert.strictEqual(results.reports[0].aggregate.sloc.logical, 3);
+         assert.strictEqual(results.reports[1].aggregate.sloc.logical, 2);
+      });
+   });
+});
+
+
 // TODO: Mockery doesn't play nice w/ Babel; redoing the index tests soon...
 
 /*

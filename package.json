@@ -38,7 +38,8 @@
   ],
   "dependencies": {
     "babylon": "^6.0.0",
-    "typhonjs-escomplex-module": "git+https://git@github.com/typhonjs-node-escomplex/typhonjs-escomplex-module.git"
+    "typhonjs-escomplex-module": "git+https://git@github.com/typhonjs-node-escomplex/typhonjs-escomplex-module.git",
+    "typhonjs-escomplex-project": "git+https://git@github.com/typhonjs-node-escomplex/typhonjs-escomplex-project.git"
   },
   "devDependencies": {
     "typhonjs-config-eslint": "^0.4.0",
@@ -50,7 +51,6 @@
     "eslint": "eslint .",
     "prepublish": "babel-node ./node_modules/typhonjs-npm-scripts-publish/scripts/prepublish.js",
     "test": "babel-node ./node_modules/typhonjs-npm-scripts-test-mocha/scripts/mocha.js",
-    "test-coverage": "babel-node ./node_modules/typhonjs-npm-scripts-test-mocha/scripts/mocha-istanbul.js",
-    "snyk": "snyk test --dev"
+    "test-coverage": "babel-node ./node_modules/typhonjs-npm-scripts-test-mocha/scripts/mocha-istanbul.js"
   }
 }

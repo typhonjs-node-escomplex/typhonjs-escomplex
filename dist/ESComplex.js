@@ -42,6 +42,11 @@ var ESComplex = function () {
          return this._escomplexModule.analyze(_Parser2.default.parse(source, parserOptions), options);
       }
    }, {
+      key: 'analyzeAST',
+      value: function analyzeAST(ast, options) {
+         return this._escomplexModule.analyze(ast, options);
+      }
+   }, {
       key: 'analyzeProject',
       value: function analyzeProject(sources, options, parserOptions) {
          // Parse sources and map entries to include `ast` entry from `code`.
@@ -61,6 +66,25 @@ var ESComplex = function () {
          });
 
          return this._escomplexProject.analyze(modules, options);
+      }
+   }, {
+      key: 'analyzeProjectAST',
+      value: function analyzeProjectAST(modules, options) {
+         return this._escomplexProject.analyze(modules, options);
+      }
+
+      /**
+       * Provides a convenience method to parse the given source code and return the Babylon AST.
+       *
+       * @param {string}   source - JS source code.
+       * @param {object}   options - (Optional) Override babylon options.
+       * @returns {*}
+       */
+
+   }, {
+      key: 'parse',
+      value: function parse(source, options) {
+         return _Parser2.default.parse(source, options);
       }
 
       /**

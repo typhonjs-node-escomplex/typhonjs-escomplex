@@ -21,6 +21,11 @@ export default class ESComplex
       return this._escomplexModule.analyze(Parser.parse(source, parserOptions), options);
    }
 
+   analyzeAST(ast, options)
+   {
+      return this._escomplexModule.analyze(ast, options);
+   }
+
    analyzeProject(sources, options, parserOptions)
    {
       // Parse sources and map entries to include `ast` entry from `code`.
@@ -41,6 +46,23 @@ export default class ESComplex
       .filter((source) => !!source);
 
       return this._escomplexProject.analyze(modules, options);
+   }
+
+   analyzeProjectAST(modules, options)
+   {
+      return this._escomplexProject.analyze(modules, options);
+   }
+
+   /**
+    * Provides a convenience method to parse the given source code and return the Babylon AST.
+    *
+    * @param {string}   source - JS source code.
+    * @param {object}   options - (Optional) Override babylon options.
+    * @returns {*}
+    */
+   parse(source, options)
+   {
+      return Parser.parse(source, options);
    }
 
    /**

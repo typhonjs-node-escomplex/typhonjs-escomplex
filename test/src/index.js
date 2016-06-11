@@ -33,9 +33,24 @@ suite('escomplex:', () =>
          assert.isFunction(escomplex.analyze);
       });
 
+      test('analyzeAST function is exported', () =>
+      {
+         assert.isFunction(escomplex.analyzeAST);
+      });
+
       test('analyzeProject function is exported', () =>
       {
          assert.isFunction(escomplex.analyzeProject);
+      });
+
+      test('analyzeProjectAST function is exported', () =>
+      {
+         assert.isFunction(escomplex.analyzeProjectAST);
+      });
+
+      test('parse function is exported', () =>
+      {
+         assert.isFunction(escomplex.parse);
       });
 
       test('processProjectResults function is exported', () =>
@@ -46,6 +61,20 @@ suite('escomplex:', () =>
       test('basic analyze sanity test', () =>
       {
          const result = escomplex.analyze('class Foo {}; class Bar extends Foo { constructor() { super(); } }');
+
+         assert.isObject(result);
+         assert.strictEqual(result.aggregate.sloc.logical, 3);
+      });
+
+      test('basic analyzeAST sanity test', () =>
+      {
+         const ast = escomplex.parse('class Foo {}; class Bar extends Foo { constructor() { super(); } }');
+
+         assert.isObject(ast);
+         assert.strictEqual(ast.type, 'File');
+         assert.isObject(ast.program);
+
+         const result = escomplex.analyzeAST(ast);
 
          assert.isObject(result);
          assert.strictEqual(result.aggregate.sloc.logical, 3);
@@ -67,6 +96,39 @@ suite('escomplex:', () =>
          assert.isObject(results.reports[0]);
          assert.strictEqual(results.reports[0].aggregate.sloc.logical, 3);
          assert.strictEqual(results.reports[1].aggregate.sloc.logical, 2);
+      });
+
+      test('basic analyzeProjectAST sanity test', () =>
+      {
+         const modules =
+         [
+            {
+               ast: escomplex.parse('class Foo {}; class Bar extends Foo { constructor() { super(); } }'),
+               path: '/path/to/file/a'
+            },
+            {
+               ast: escomplex.parse('const iter = [2, 3, 4]; const spreadTest = [1, ...iter, 5];'),
+               path: '/path/to/file/b'
+            }
+         ];
+
+         const results = escomplex.analyzeProjectAST(modules);
+
+         assert.isObject(results);
+         assert.isArray(results.reports);
+         assert.strictEqual(results.reports.length, 2);
+         assert.isObject(results.reports[0]);
+         assert.strictEqual(results.reports[0].aggregate.sloc.logical, 3);
+         assert.strictEqual(results.reports[1].aggregate.sloc.logical, 2);
+      });
+
+      test('basic parse sanity test', () =>
+      {
+         const ast = escomplex.parse('class Foo {}; class Bar extends Foo { constructor() { super(); } }');
+
+         assert.isObject(ast);
+         assert.strictEqual(ast.type, 'File');
+         assert.isObject(ast.program);
       });
    });
 });

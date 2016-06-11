@@ -1,9 +1,12 @@
-# escomplex
+# typhonjs-escomplex
 
-[![Build status][ci-image]][ci-status]
-[![Dependencies][dep-image]][dep-status]
-[![Dev Dependencies][devdep-image]][devdep-status]
-[![Known Vulnerabilities](https://snyk.io/test/github/jared-stilwell/escomplex/badge.svg)](https://snyk.io/test/github/jared-stilwell/escomplex)
+Please note that this is a permanent fork / rewrite of escomplex for next generation Javascript complexity reports. This future NPM module utilizes [babylon](https://github.com/babel/babylon) w/ all plugins enabled to parse JS source code feeding the rest of the AST / processing modules which are available separately. Please review the [typhonjs-node-escomplex](https://github.com/typhonjs-node-escomplex) organization for all of the separate components which may be used independently if direct AST processing is necessary.
+
+Work is swiftly being finished, so please be patient as a public launch is imminent. 
+
+------------------
+
+Old ESComplex README info:
 
 Software complexity analysis
 of JavaScript-family abstract syntax trees.

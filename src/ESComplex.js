@@ -134,7 +134,8 @@ export default class ESComplex
    // Asynchronous Promise based methods ----------------------------------------------------------------------------
 
    /**
-    * Parses the given source code then processes the generated AST and calculates metrics via plugins.
+    * Wraps in a Promise parsing of the given source code then processes the generated AST and calculates metrics via
+    * plugins.
     *
     * @param {string}   source - Javascript source code.
     * @param {object}   options - (Optional) module analyze options.
@@ -152,7 +153,7 @@ export default class ESComplex
    }
 
    /**
-    * Processes the given ast and calculates metrics via plugins.
+    * Wraps in a Promise processing the given ast and calculates metrics via plugins.
     *
     * @param {object|Array}   ast - Javascript AST.
     * @param {object}         options - (Optional) module analyze options.
@@ -169,7 +170,7 @@ export default class ESComplex
    }
 
    /**
-    * Processes the given sources and calculates project metrics via plugins.
+    * Wraps in a Promise processing the given sources and calculates project metrics via plugins.
     *
     * @param {Array}    sources - Array of object hashes containing `code` and `path` entries.
     * @param {object}   options - (Optional) project processing options.
@@ -188,7 +189,7 @@ export default class ESComplex
    }
 
    /**
-    * Processes the given modules and calculates project metrics via plugins.
+    * Wraps in a Promise processing the given modules and calculates project metrics via plugins.
     *
     * @param {Array}    modules - Array of object hashes containing `ast` and `path` entries.
     * @param {object}   options - (Optional) project processing options.
@@ -206,7 +207,7 @@ export default class ESComplex
    }
 
    /**
-    * Provides a convenience method to parse the given source code and return the babylon AST.
+    * Wraps in a Promise a convenience method to parse the given source code and return the babylon AST.
     *
     * @param {string}   source - Javascript source code.
     * @param {object}   options - (Optional) overrides default babylon parser options.
@@ -223,7 +224,7 @@ export default class ESComplex
    }
 
    /**
-    * Processes existing project results and calculates metrics via plugins.
+    * Wraps in a Promise processing existing project results and calculates metrics via plugins.
     *
     * @param {object}   results - An object hash with a `reports` entry that is an Array of module results.
     * @param {object}   options - (Optional) project processing options.

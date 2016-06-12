@@ -2,9 +2,12 @@
 
 import { assert } from 'chai';
 
+// import ESComplex from '../../src/ESComplex.js';
+import escomplex from '../../src/index.js';
+
 const modulePath = '../../dist';
 
-suite('escomplex:', () =>
+suite('typhonjs-escomplex:', () =>
 {
    test('require does not throw', () =>
    {
@@ -16,18 +19,51 @@ suite('escomplex:', () =>
 
    suite('require:', () =>
    {
-      let escomplex;
+      let module;
 
       setup(() =>
       {
-         escomplex = require(modulePath);
+         module = require(modulePath);
       });
 
       teardown(() =>
       {
-         escomplex = undefined;
+         module = undefined;
       });
 
+      test('analyze function is exported', () =>
+      {
+         assert.isFunction(module.analyze);
+      });
+
+      test('analyzeAST function is exported', () =>
+      {
+         assert.isFunction(module.analyzeAST);
+      });
+
+      test('analyzeProject function is exported', () =>
+      {
+         assert.isFunction(module.analyzeProject);
+      });
+
+      test('analyzeProjectAST function is exported', () =>
+      {
+         assert.isFunction(module.analyzeProjectAST);
+      });
+
+      test('parse function is exported', () =>
+      {
+         assert.isFunction(module.parse);
+      });
+
+      test('processProjectResults function is exported', () =>
+      {
+         assert.isFunction(module.processProjectResults);
+      });
+   });
+
+   suite('escomplex:', () =>
+   {
       test('analyze function is exported', () =>
       {
          assert.isFunction(escomplex.analyze);
@@ -132,7 +168,6 @@ suite('escomplex:', () =>
       });
    });
 });
-
 
 // TODO: Mockery doesn't play nice w/ Babel; redoing the index tests soon...
 

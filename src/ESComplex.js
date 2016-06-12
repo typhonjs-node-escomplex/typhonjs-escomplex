@@ -26,7 +26,7 @@ export default class ESComplex
     */
    constructor(options = {})
    {
-      if (typeof options !== 'object') { throw new TypeError('ctor error: `options` is not an `object`.')}
+      if (typeof options !== 'object') { throw new TypeError('ctor error: `options` is not an `object`.'); }
 
       this._escomplexModule = new ESComplexModule(options.module);
       this._escomplexProject = new ESComplexProject(options);

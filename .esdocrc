@@ -6,10 +6,5 @@
    [
       { "name": "esdoc-plugin-enhanced-navigation" }
    ],
-   "manual": { "changelog": ["./CHANGELOG.md"] },
-   "test":
-   {
-      "type": "mocha",
-      "source": "./test/src"
-   }
+   "manual": { "changelog": ["./CHANGELOG.md"] }
 }

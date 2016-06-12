@@ -1,29 +1,9 @@
-Phil Booth <pmbooth@gmail.com> (https://github.com/philbooth)
+####Corporate Copyright Statements
+-----
 
-Juzer Ali (https://github.com/juzerali)
+Copyright (c) 2016-present TyphonRT Inc. [@typhonrt](https://github.com/typhonrt)
 
-Mark Trostler (https://github.com/zzo)
+####Contributors
+-----
 
-Wyatt Preul (https://github.com/wpreul)
-
-Rowan Manning (https://github.com/rowanmanning)
-
-Andrew Pennebaker (https://github.com/mcandre)
-
-Nils Kenneweg (https://github.com/nkenneweg)
-
-Eric Burin des Roziers (https://github.com/Ericbdr)
-
-Tim Ruffles (https://github.com/timruffles)
-
-Will Boyd (https://github.com/lonekorean)
-
-Addison Higham (https://github.com/addisonj)
-
-Jared Stilwell (https://github.com/jared-stilwell)
-
-Adam Moss (https://github.com/adam-moss)
-
-Richard Leap (https://github.com/apergy)
-
-Michael Leahy (https://github.com/typhonrt)
+Michael Leahy [@typhonrt](https://github.com/typhonrt)

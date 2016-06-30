@@ -38,8 +38,8 @@
   ],
   "dependencies": {
     "babylon": "^6.0.0",
-    "typhonjs-escomplex-module": "^0.0.1",
-    "typhonjs-escomplex-project": "^0.0.1"
+    "typhonjs-escomplex-module": "^0.0.2",
+    "typhonjs-escomplex-project": "^0.0.2"
   },
   "devDependencies": {
     "typhonjs-config-eslint": "^0.4.0",

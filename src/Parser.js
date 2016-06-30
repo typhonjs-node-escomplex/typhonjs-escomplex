@@ -5,12 +5,14 @@ import * as babylon from 'babylon';
 /**
  * Provides a comprehensive regex test to determine if source code is an ES Module.
  * @type {RegExp}
+ * @ignore
  */
 const s_ESM_REGEX = /(^\s*|[}\);\n]\s*)(import\s*(['"]|(\*\s+as\s+)?[^"'\(\)\n;]+\s*from\s*['"]|\{)|export\s+\*\s+from\s+["']|export\s* (\{|default|function|class|var|const|let|async\s+function))/;
 
 /**
- * Default bablyon options applying all available plugins.
+ * Default babylon options applying all available plugins.
  * @type {{plugins: string[]}}
+ * @ignore
  */
 const s_BABYLON_OPTIONS =
 {

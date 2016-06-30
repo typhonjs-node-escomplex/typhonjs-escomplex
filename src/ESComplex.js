@@ -1,9 +1,9 @@
 'use strict';
 
-import ESComplexModule  from 'typhonjs-escomplex-module/src/ESComplexModule.js';
-import ESComplexProject from 'typhonjs-escomplex-project/src/ESComplexProject.js';
+import ESComplexModule  from 'typhonjs-escomplex-module/src/ESComplexModule';
+import ESComplexProject from 'typhonjs-escomplex-project/src/ESComplexProject';
 
-import Parser           from './Parser.js';
+import Parser           from './Parser';
 
 /**
  * Next generation code complexity reporting for Javascript abstract syntax trees (AST).
@@ -26,9 +26,21 @@ export default class ESComplex
     */
    constructor(options = {})
    {
+      /* istanbul ignore if */
       if (typeof options !== 'object') { throw new TypeError('ctor error: `options` is not an `object`.'); }
 
+      /**
+       * An instance of ESComplexModule.
+       * @type {ESComplexModule}
+       * @private
+       */
       this._escomplexModule = new ESComplexModule(options.module);
+
+      /**
+       * An instance of ESComplexProject.
+       * @type {ESComplexProject}
+       * @private
+       */
       this._escomplexProject = new ESComplexProject(options);
    }
 
@@ -43,6 +55,7 @@ export default class ESComplex
     */
    analyze(source, options, parserOptions)
    {
+      /* istanbul ignore if */
       if (typeof source !== 'string') { throw new TypeError('analyze error: `source` is not a `string`.'); }
 
       return this._escomplexModule.analyze(Parser.parse(source, parserOptions), options);
@@ -81,6 +94,7 @@ export default class ESComplex
          }
          catch (error)
          {
+            /* istanbul ignore if */
             if (options.ignoreErrors) { return null; }
 
             error.message = `${source.path}: ${error.message}`;
@@ -148,7 +162,7 @@ export default class ESComplex
       return new Promise((resolve, reject) =>
       {
          try { resolve(this.analyze(source, options, parserOptions)); }
-         catch (err) { reject(err); }
+         catch (err) { /* istanbul ignore next */ reject(err); }
       });
    }
 
@@ -165,7 +179,7 @@ export default class ESComplex
       return new Promise((resolve, reject) =>
       {
          try { resolve(this.analyzeAST(ast, options)); }
-         catch (err) { reject(err); }
+         catch (err) { /* istanbul ignore next */ reject(err); }
       });
    }
 
@@ -184,7 +198,7 @@ export default class ESComplex
       return new Promise((resolve, reject) =>
       {
          try { resolve(this.analyzeProject(sources, options, parserOptions)); }
-         catch (err) { reject(err); }
+         catch (err) { /* istanbul ignore next */ reject(err); }
       });
    }
 
@@ -202,7 +216,7 @@ export default class ESComplex
       return new Promise((resolve, reject) =>
       {
          try { resolve(this.analyzeProjectAST(modules, options)); }
-         catch (err) { reject(err); }
+         catch (err) { /* istanbul ignore next */ reject(err); }
       });
    }
 
@@ -219,7 +233,7 @@ export default class ESComplex
       return new Promise((resolve, reject) =>
       {
          try { resolve(this.parse(source, options)); }
-         catch (err) { reject(err); }
+         catch (err) { /* istanbul ignore next */ reject(err); }
       });
    }
 
@@ -237,7 +251,7 @@ export default class ESComplex
       return new Promise((resolve, reject) =>
       {
          try { resolve(this.processProjectResults(results, options)); }
-         catch (err) { reject(err); }
+         catch (err) { /* istanbul ignore next */ reject(err); }
       });
    }
 }

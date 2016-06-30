@@ -53,7 +53,7 @@ export default class ESComplex
     *
     * @returns {object} - A single module report.
     */
-   analyze(source, options, parserOptions)
+   analyze(source, options = {}, parserOptions = undefined)
    {
       /* istanbul ignore if */
       if (typeof source !== 'string') { throw new TypeError('analyze error: `source` is not a `string`.'); }
@@ -69,7 +69,7 @@ export default class ESComplex
     *
     * @returns {object} - A single module report.
     */
-   analyzeAST(ast, options)
+   analyzeAST(ast, options = {})
    {
       return this._escomplexModule.analyze(ast, options);
    }
@@ -83,7 +83,7 @@ export default class ESComplex
     *
     * @returns {{reports: Array<{}>}} - An object hash with a `reports` entry that is an Array of module results.
     */
-   analyzeProject(sources, options, parserOptions)
+   analyzeProject(sources, options = {}, parserOptions = undefined)
    {
       // Parse sources and map entries to include `ast` entry from `code`.
       const modules = sources.map((source) =>
@@ -114,7 +114,7 @@ export default class ESComplex
     *
     * @returns {{reports: Array<{}>}} - An object hash with a `reports` entry that is an Array of module results.
     */
-   analyzeProjectAST(modules, options)
+   analyzeProjectAST(modules, options = {})
    {
       return this._escomplexProject.analyze(modules, options);
    }
@@ -123,13 +123,13 @@ export default class ESComplex
     * Provides a convenience method to parse the given source code and return the babylon AST.
     *
     * @param {string}   source - Javascript source code.
-    * @param {object}   options - (Optional) overrides default babylon parser options.
+    * @param {object}   parserOptions - (Optional) overrides default babylon parser options.
     *
     * @returns {object} - babylon generated AST.
     */
-   parse(source, options)
+   parse(source, parserOptions = undefined)
    {
-      return Parser.parse(source, options);
+      return Parser.parse(source, parserOptions);
    }
 
    /**
@@ -140,7 +140,7 @@ export default class ESComplex
     *
     * @returns {{reports: Array<{}>}} - An object hash with a `reports` entry that is an Array of module results.
     */
-   processProjectResults(results, options)
+   processProjectResults(results, options = {})
    {
       return this._escomplexProject.processResults(results, options);
    }
@@ -157,7 +157,7 @@ export default class ESComplex
     *
     * @returns {object} - A single module report.
     */
-   analyzeThen(source, options, parserOptions)
+   analyzeThen(source, options = {}, parserOptions = undefined)
    {
       return new Promise((resolve, reject) =>
       {
@@ -174,7 +174,7 @@ export default class ESComplex
     *
     * @returns {Promise<object>} - A single module report.
     */
-   analyzeASTThen(ast, options)
+   analyzeASTThen(ast, options = {})
    {
       return new Promise((resolve, reject) =>
       {
@@ -193,7 +193,7 @@ export default class ESComplex
     * @returns {Promise<{reports: Array<{}>}>} - An object hash with a `reports` entry that is an Array of module
     *                                            results.
     */
-   analyzeProjectThen(sources, options, parserOptions)
+   analyzeProjectThen(sources, options = {}, parserOptions = undefined)
    {
       return new Promise((resolve, reject) =>
       {
@@ -211,7 +211,7 @@ export default class ESComplex
     * @returns {Promise<{reports: Array<{}>}>} - An object hash with a `reports` entry that is an Array of module
     *                                            results.
     */
-   analyzeProjectASTThen(modules, options)
+   analyzeProjectASTThen(modules, options = {})
    {
       return new Promise((resolve, reject) =>
       {
@@ -224,15 +224,15 @@ export default class ESComplex
     * Wraps in a Promise a convenience method to parse the given source code and return the babylon AST.
     *
     * @param {string}   source - Javascript source code.
-    * @param {object}   options - (Optional) overrides default babylon parser options.
+    * @param {object}   parserOptions - (Optional) overrides default babylon parser options.
     *
     * @returns {Promise<object>} - babylon generated AST.
     */
-   parseThen(source, options)
+   parseThen(source, parserOptions = undefined)
    {
       return new Promise((resolve, reject) =>
       {
-         try { resolve(this.parse(source, options)); }
+         try { resolve(this.parse(source, parserOptions)); }
          catch (err) { /* istanbul ignore next */ reject(err); }
       });
    }
@@ -246,7 +246,7 @@ export default class ESComplex
     * @returns {Promise<{reports: Array<{}>}>} - An object hash with a `reports` entry that is an Array of module
     *                                            results.
     */
-   processProjectResultsThen(results, options)
+   processProjectResultsThen(results, options = {})
    {
       return new Promise((resolve, reject) =>
       {

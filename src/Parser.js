@@ -35,7 +35,7 @@ export default class Parser
     *
     * @returns {object}
     */
-   static parse(source, options)
+   static parse(source, options = undefined)
    {
       options = typeof options === 'object' ? options : s_BABYLON_OPTIONS;
       options.sourceType = s_ESM_REGEX.test(source) ? 'module' : 'script';

@@ -1,6 +1,6 @@
 {
   "name": "typhonjs-escomplex",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Next generation software complexity analysis of JavaScript-family abstract syntax trees.",
   "homepage": "https://github.com/typhonjs-node-escomplex/typhonjs-escomplex",
   "bugs": "https://github.com/typhonjs-node-escomplex/typhonjs-escomplex/issues",

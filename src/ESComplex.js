@@ -77,9 +77,9 @@ export default class ESComplex
    /**
     * Processes the given sources and calculates project metrics via plugins.
     *
-    * @param {Array}    sources - Array of object hashes containing `code` and `path` entries.
-    * @param {object}   options - (Optional) project processing options.
-    * @param {object}   parserOptions - (Optional) overrides default babylon parser options.
+    * @param {Array<object>}  sources - Array of object hashes containing `code` and `path` entries.
+    * @param {object}         options - (Optional) project processing options.
+    * @param {object}         parserOptions - (Optional) overrides default babylon parser options.
     *
     * @returns {{reports: Array<{}>}} - An object hash with a `reports` entry that is an Array of module results.
     */
@@ -109,8 +109,8 @@ export default class ESComplex
    /**
     * Processes the given modules and calculates project metrics via plugins.
     *
-    * @param {Array}    modules - Array of object hashes containing `ast` and `path` entries.
-    * @param {object}   options - (Optional) project processing options.
+    * @param {Array<object>}  modules - Array of object hashes containing `ast` and `path` entries.
+    * @param {object}         options - (Optional) project processing options.
     *
     * @returns {{reports: Array<{}>}} - An object hash with a `reports` entry that is an Array of module results.
     */
@@ -186,9 +186,9 @@ export default class ESComplex
    /**
     * Wraps in a Promise processing the given sources and calculates project metrics via plugins.
     *
-    * @param {Array}    sources - Array of object hashes containing `code` and `path` entries.
-    * @param {object}   options - (Optional) project processing options.
-    * @param {object}   parserOptions - (Optional) overrides default babylon parser options.
+    * @param {Array<object>}  sources - Array of object hashes containing `code` and `path` entries.
+    * @param {object}         options - (Optional) project processing options.
+    * @param {object}         parserOptions - (Optional) overrides default babylon parser options.
     *
     * @returns {Promise<{reports: Array<{}>}>} - An object hash with a `reports` entry that is an Array of module
     *                                            results.

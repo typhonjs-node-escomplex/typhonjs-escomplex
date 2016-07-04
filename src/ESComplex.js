@@ -1,5 +1,3 @@
-'use strict';
-
 import ESComplexModule  from 'typhonjs-escomplex-module/src/ESComplexModule';
 import ESComplexProject from 'typhonjs-escomplex-project/src/ESComplexProject';
 

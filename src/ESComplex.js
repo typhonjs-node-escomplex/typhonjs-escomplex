@@ -155,7 +155,7 @@ export default class ESComplex
     *
     * @returns {object} - A single module report.
     */
-   analyzeThen(source, options = {}, parserOptions = undefined)
+   analyzeAsync(source, options = {}, parserOptions = undefined)
    {
       return new Promise((resolve, reject) =>
       {
@@ -172,7 +172,7 @@ export default class ESComplex
     *
     * @returns {Promise<object>} - A single module report.
     */
-   analyzeASTThen(ast, options = {})
+   analyzeASTAsync(ast, options = {})
    {
       return new Promise((resolve, reject) =>
       {
@@ -191,7 +191,7 @@ export default class ESComplex
     * @returns {Promise<{reports: Array<{}>}>} - An object hash with a `reports` entry that is an Array of module
     *                                            results.
     */
-   analyzeProjectThen(sources, options = {}, parserOptions = undefined)
+   analyzeProjectAsync(sources, options = {}, parserOptions = undefined)
    {
       return new Promise((resolve, reject) =>
       {
@@ -209,7 +209,7 @@ export default class ESComplex
     * @returns {Promise<{reports: Array<{}>}>} - An object hash with a `reports` entry that is an Array of module
     *                                            results.
     */
-   analyzeProjectASTThen(modules, options = {})
+   analyzeProjectASTAsync(modules, options = {})
    {
       return new Promise((resolve, reject) =>
       {
@@ -226,7 +226,7 @@ export default class ESComplex
     *
     * @returns {Promise<object>} - babylon generated AST.
     */
-   parseThen(source, parserOptions = undefined)
+   parseAsync(source, parserOptions = undefined)
    {
       return new Promise((resolve, reject) =>
       {
@@ -244,7 +244,7 @@ export default class ESComplex
     * @returns {Promise<{reports: Array<{}>}>} - An object hash with a `reports` entry that is an Array of module
     *                                            results.
     */
-   processProjectResultsThen(results, options = {})
+   processProjectResultsAsync(results, options = {})
    {
       return new Promise((resolve, reject) =>
       {

@@ -129,9 +129,9 @@ suite('typhonjs-escomplex:', () =>
          assert.strictEqual(results.reports[1].aggregate.sloc.logical, 2);
       });
 
-      test('sanity test - analyzeThen', () =>
+      test('sanity test - analyzeAsync', () =>
       {
-         const promise = escomplex.analyzeThen('class Foo {}; class Bar extends Foo { constructor() { super(); } }');
+         const promise = escomplex.analyzeAsync('class Foo {}; class Bar extends Foo { constructor() { super(); } }');
 
          promise.then((result) =>
          {
@@ -140,7 +140,7 @@ suite('typhonjs-escomplex:', () =>
          });
       });
 
-      test('sanity test - analyzeASTThen', () =>
+      test('sanity test - analyzeASTAsync', () =>
       {
          const ast = escomplex.parse('class Foo {}; class Bar extends Foo { constructor() { super(); } }');
 
@@ -148,7 +148,7 @@ suite('typhonjs-escomplex:', () =>
          assert.strictEqual(ast.type, 'File');
          assert.isObject(ast.program);
 
-         const promise = escomplex.analyzeASTThen(ast);
+         const promise = escomplex.analyzeASTAsync(ast);
 
          promise.then((result) =>
          {
@@ -157,7 +157,7 @@ suite('typhonjs-escomplex:', () =>
          });
       });
 
-      test('sanity test - analyzeProjectThen', () =>
+      test('sanity test - analyzeProjectAsync', () =>
       {
          const sources =
          [
@@ -165,7 +165,7 @@ suite('typhonjs-escomplex:', () =>
             { code: 'const iter = [2, 3, 4]; const spreadTest = [1, ...iter, 5];', path: '/path/to/file/b' }
          ];
 
-         const promise = escomplex.analyzeProjectThen(sources);
+         const promise = escomplex.analyzeProjectAsync(sources);
 
          promise.then((results) =>
          {
@@ -178,7 +178,7 @@ suite('typhonjs-escomplex:', () =>
          });
       });
 
-      test('sanity test - analyzeProjectASTThen', () =>
+      test('sanity test - analyzeProjectASTAsync', () =>
       {
          const modules =
          [
@@ -192,7 +192,7 @@ suite('typhonjs-escomplex:', () =>
             }
          ];
 
-         const promise = escomplex.analyzeProjectASTThen(modules);
+         const promise = escomplex.analyzeProjectASTAsync(modules);
 
          promise.then((results) =>
          {
@@ -205,9 +205,9 @@ suite('typhonjs-escomplex:', () =>
          });
       });
 
-      test('sanity test - parseThen', () =>
+      test('sanity test - parseAsync', () =>
       {
-         const promise = escomplex.parseThen('class Foo {}; class Bar extends Foo { constructor() { super(); } }');
+         const promise = escomplex.parseAsync('class Foo {}; class Bar extends Foo { constructor() { super(); } }');
 
          promise.then((ast) =>
          {
@@ -217,7 +217,7 @@ suite('typhonjs-escomplex:', () =>
          });
       });
 
-      test('sanity test - processProjectResultsThen', () =>
+      test('sanity test - processProjectResultsAsync', () =>
       {
          const sources =
          [
@@ -225,9 +225,9 @@ suite('typhonjs-escomplex:', () =>
             { code: 'const iter = [2, 3, 4]; const spreadTest = [1, ...iter, 5];', path: '/path/to/file/b' }
          ];
 
-         escomplex.analyzeProjectThen(sources, { skipCalculation: true }).then((results) =>
+         escomplex.analyzeProjectAsync(sources, { skipCalculation: true }).then((results) =>
          {
-            return escomplex.processProjectResultsThen(results);
+            return escomplex.processProjectResultsAsync(results);
          }).then((results) =>
          {
             assert.isObject(results);

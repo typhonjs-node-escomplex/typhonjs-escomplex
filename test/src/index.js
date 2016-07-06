@@ -62,8 +62,8 @@ suite('typhonjs-escomplex:', () =>
       {
          const sources =
          [
-            { code: 'class Foo {}; class Bar extends Foo { constructor() { super(); } }', path: '/path/to/file/a' },
-            { code: 'const iter = [2, 3, 4]; const spreadTest = [1, ...iter, 5];', path: '/path/to/file/b' }
+            { code: 'class Foo {}; class Bar extends Foo { constructor() { super(); } }', srcPath: '/path/to/file/a' },
+            { code: 'const iter = [2, 3, 4]; const spreadTest = [1, ...iter, 5];', srcPath: '/path/to/file/b' }
          ];
 
          const results = escomplex.analyzeProject(sources);
@@ -82,11 +82,11 @@ suite('typhonjs-escomplex:', () =>
          [
             {
                ast: escomplex.parse('class Foo {}; class Bar extends Foo { constructor() { super(); } }'),
-               path: '/path/to/file/a'
+               srcPath: '/path/to/file/a'
             },
             {
                ast: escomplex.parse('const iter = [2, 3, 4]; const spreadTest = [1, ...iter, 5];'),
-               path: '/path/to/file/b'
+               srcPath: '/path/to/file/b'
             }
          ];
 
@@ -113,8 +113,8 @@ suite('typhonjs-escomplex:', () =>
       {
          const sources =
          [
-            { code: 'class Foo {}; class Bar extends Foo { constructor() { super(); } }', path: '/path/to/file/a' },
-            { code: 'const iter = [2, 3, 4]; const spreadTest = [1, ...iter, 5];', path: '/path/to/file/b' }
+            { code: 'class Foo {}; class Bar extends Foo { constructor() { super(); } }', srcPath: '/path/to/file/a' },
+            { code: 'const iter = [2, 3, 4]; const spreadTest = [1, ...iter, 5];', srcPath: '/path/to/file/b' }
          ];
 
          let results = escomplex.analyzeProject(sources, { skipCalculation: true });
@@ -161,8 +161,8 @@ suite('typhonjs-escomplex:', () =>
       {
          const sources =
          [
-            { code: 'class Foo {}; class Bar extends Foo { constructor() { super(); } }', path: '/path/to/file/a' },
-            { code: 'const iter = [2, 3, 4]; const spreadTest = [1, ...iter, 5];', path: '/path/to/file/b' }
+            { code: 'class Foo {}; class Bar extends Foo { constructor() { super(); } }', srcPath: '/path/to/file/a' },
+            { code: 'const iter = [2, 3, 4]; const spreadTest = [1, ...iter, 5];', srcPath: '/path/to/file/b' }
          ];
 
          const promise = escomplex.analyzeProjectAsync(sources);
@@ -184,11 +184,11 @@ suite('typhonjs-escomplex:', () =>
          [
             {
                ast: escomplex.parse('class Foo {}; class Bar extends Foo { constructor() { super(); } }'),
-               path: '/path/to/file/a'
+               srcPath: '/path/to/file/a'
             },
             {
                ast: escomplex.parse('const iter = [2, 3, 4]; const spreadTest = [1, ...iter, 5];'),
-               path: '/path/to/file/b'
+               srcPath: '/path/to/file/b'
             }
          ];
 
@@ -221,8 +221,8 @@ suite('typhonjs-escomplex:', () =>
       {
          const sources =
          [
-            { code: 'class Foo {}; class Bar extends Foo { constructor() { super(); } }', path: '/path/to/file/a' },
-            { code: 'const iter = [2, 3, 4]; const spreadTest = [1, ...iter, 5];', path: '/path/to/file/b' }
+            { code: 'class Foo {}; class Bar extends Foo { constructor() { super(); } }', srcPath: '/path/to/file/a' },
+            { code: 'const iter = [2, 3, 4]; const spreadTest = [1, ...iter, 5];', srcPath: '/path/to/file/b' }
          ];
 
          escomplex.analyzeProjectAsync(sources, { skipCalculation: true }).then((results) =>

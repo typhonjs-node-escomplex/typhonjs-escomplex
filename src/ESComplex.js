@@ -1,3 +1,5 @@
+import path             from 'path';
+
 import ESComplexModule  from 'typhonjs-escomplex-module/src/ESComplexModule';
 import ESComplexProject from 'typhonjs-escomplex-project/src/ESComplexProject';
 
@@ -39,7 +41,7 @@ export default class ESComplex
        * @type {ESComplexProject}
        * @private
        */
-      this._escomplexProject = new ESComplexProject(options);
+      this._escomplexProject = new ESComplexProject(path, options);
    }
 
    /**
@@ -75,7 +77,7 @@ export default class ESComplex
    /**
     * Processes the given sources and calculates project metrics via plugins.
     *
-    * @param {Array<object>}  sources - Array of object hashes containing `code` and `path` entries.
+    * @param {Array<object>}  sources - Array of object hashes containing `code` and `srcPath` entries.
     * @param {object}         options - (Optional) project processing options.
     * @param {object}         parserOptions - (Optional) overrides default babylon parser options.
     *
@@ -88,7 +90,12 @@ export default class ESComplex
       {
          try
          {
-            return { ast: Parser.parse(source.code, parserOptions), path: source.path };
+            return {
+               ast: Parser.parse(source.code, parserOptions),
+               filePath: source.filePath,
+               srcPath: source.srcPath,
+               srcPathAlias: source.srcPathAlias
+            };
          }
          catch (error)
          {

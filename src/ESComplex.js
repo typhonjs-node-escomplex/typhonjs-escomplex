@@ -6,7 +6,14 @@ import ESComplexProject from 'typhonjs-escomplex-project/src/ESComplexProject';
 import Parser           from './Parser';
 
 /**
- * Next generation code complexity reporting for Javascript abstract syntax trees (AST).
+ * Next generation code complexity reporting for Javascript abstract syntax trees (AST). ESComplex exposes all methods
+ * available via ESComplexModule & ESComplexProject modules which process AST. Several methods available below accept
+ * source code which is translated via Babylon w/ all plugins enabled allowing any ES6/ES7/edge JS to be parsed.
+ * Asynchronous versions with the `Async` suffix of all methods are available as well.
+ *
+ * @see https://www.npmjs.com/package/typhonjs-escomplex-module
+ * @see https://www.npmjs.com/package/typhonjs-escomplex-project
+ * @see https://www.npmjs.com/package/babylon
  */
 export default class ESComplex
 {

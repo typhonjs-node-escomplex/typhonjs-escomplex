@@ -17,7 +17,7 @@ Work is swiftly being finished.
 More information forthcoming. This NPM module can be installed as a dependency in `package.json` as follows:
 ```
 "dependencies": {
-  "typhonjs-escomplex": "^0.0.3"
+  "typhonjs-escomplex": "^0.0.4"
 }
 ```
 

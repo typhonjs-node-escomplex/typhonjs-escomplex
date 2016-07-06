@@ -77,8 +77,11 @@ export default class ESComplex
    /**
     * Processes the given sources and calculates project metrics via plugins.
     *
-    * @param {Array<object>}  sources - Array of object hashes containing `code` and `srcPath` entries.
+    * @param {Array<object>}  sources - Array of object hashes containing `code` and `srcPath` entries with optional
+    *                                   entries include `filePath` and `srcPathAlias`.
+    *
     * @param {object}         options - (Optional) project processing options.
+    *
     * @param {object}         parserOptions - (Optional) overrides default babylon parser options.
     *
     * @returns {{reports: Array<{}>}} - An object hash with a `reports` entry that is an Array of module results.
@@ -102,7 +105,10 @@ export default class ESComplex
             /* istanbul ignore if */
             if (options.ignoreErrors) { return null; }
 
+            /* istanbul ignore next */
             error.message = `${source.path}: ${error.message}`;
+
+            /* istanbul ignore next */
             throw error;
          }
       })
@@ -114,7 +120,9 @@ export default class ESComplex
    /**
     * Processes the given modules and calculates project metrics via plugins.
     *
-    * @param {Array<object>}  modules - Array of object hashes containing `ast` and `path` entries.
+    * @param {Array<object>}  modules - Array of object hashes containing `ast` and `srcPath` entries with optional
+    *                                   entries include `filePath` and `srcPathAlias`.
+    *
     * @param {object}         options - (Optional) project processing options.
     *
     * @returns {{reports: Array<{}>}} - An object hash with a `reports` entry that is an Array of module results.

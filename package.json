@@ -8,6 +8,9 @@
     "name": "Mike Leahy"
   },
   "main": "./dist",
+  "bin": {
+    "escomplex": "dist/ESComplexCLI"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/typhonjs-node-escomplex/typhonjs-escomplex.git"
@@ -21,6 +24,7 @@
   ],
   "dependencies": {
     "babylon": "^6.0.0",
+    "commander": "^2.0.0",
     "typhonjs-escomplex-module": "^0.0.4",
     "typhonjs-escomplex-project": "^0.0.4"
   },

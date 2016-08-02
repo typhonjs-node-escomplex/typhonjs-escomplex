@@ -5,6 +5,6 @@
  */
 export const modules =
 {
-   cli: true,
+   cli: false,
    index: true
 };

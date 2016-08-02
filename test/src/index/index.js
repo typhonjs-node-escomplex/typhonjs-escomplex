@@ -10,14 +10,14 @@ if (testconfig.modules['index'])
    {
       suite('escomplex:', () =>
       {
-         test('analyze function is exported', () =>
+         test('analyzeModule function is exported', () =>
          {
-            assert.isFunction(escomplex.analyze);
+            assert.isFunction(escomplex.analyzeModule);
          });
 
-         test('analyzeAST function is exported', () =>
+         test('analyzeModuleAST function is exported', () =>
          {
-            assert.isFunction(escomplex.analyzeAST);
+            assert.isFunction(escomplex.analyzeModuleAST);
          });
 
          test('analyzeProject function is exported', () =>
@@ -35,20 +35,20 @@ if (testconfig.modules['index'])
             assert.isFunction(escomplex.parse);
          });
 
-         test('processProjectResults function is exported', () =>
+         test('processProject function is exported', () =>
          {
-            assert.isFunction(escomplex.processProjectResults);
+            assert.isFunction(escomplex.processProject);
          });
 
-         test('sanity test - analyze', () =>
+         test('sanity test - analyzeModule', () =>
          {
-            const result = escomplex.analyze('class Foo {}; class Bar extends Foo { constructor() { super(); } }');
+            const result = escomplex.analyzeModule('class Foo {}; class Bar extends Foo { constructor() { super(); } }');
 
             assert.isObject(result);
-            assert.strictEqual(result.aggregate.sloc.logical, 3);
+            assert.strictEqual(result.methodAggregate.sloc.logical, 3);
          });
 
-         test('sanity test - analyzeAST', () =>
+         test('sanity test - analyzeModuleAST', () =>
          {
             const ast = escomplex.parse('class Foo {}; class Bar extends Foo { constructor() { super(); } }');
 
@@ -56,10 +56,10 @@ if (testconfig.modules['index'])
             assert.strictEqual(ast.type, 'File');
             assert.isObject(ast.program);
 
-            const result = escomplex.analyzeAST(ast);
+            const result = escomplex.analyzeModuleAST(ast);
 
             assert.isObject(result);
-            assert.strictEqual(result.aggregate.sloc.logical, 3);
+            assert.strictEqual(result.methodAggregate.sloc.logical, 3);
          });
 
          test('sanity test - analyzeProject', () =>
@@ -73,11 +73,11 @@ if (testconfig.modules['index'])
             const results = escomplex.analyzeProject(sources);
 
             assert.isObject(results);
-            assert.isArray(results.reports);
-            assert.strictEqual(results.reports.length, 2);
-            assert.isObject(results.reports[0]);
-            assert.strictEqual(results.reports[0].aggregate.sloc.logical, 3);
-            assert.strictEqual(results.reports[1].aggregate.sloc.logical, 2);
+            assert.isArray(results.modules);
+            assert.strictEqual(results.modules.length, 2);
+            assert.isObject(results.modules[0]);
+            assert.strictEqual(results.modules[0].methodAggregate.sloc.logical, 3);
+            assert.strictEqual(results.modules[1].methodAggregate.sloc.logical, 2);
          });
 
          test('sanity test - analyzeProjectAST', () =>
@@ -97,11 +97,11 @@ if (testconfig.modules['index'])
             const results = escomplex.analyzeProjectAST(modules);
 
             assert.isObject(results);
-            assert.isArray(results.reports);
-            assert.strictEqual(results.reports.length, 2);
-            assert.isObject(results.reports[0]);
-            assert.strictEqual(results.reports[0].aggregate.sloc.logical, 3);
-            assert.strictEqual(results.reports[1].aggregate.sloc.logical, 2);
+            assert.isArray(results.modules);
+            assert.strictEqual(results.modules.length, 2);
+            assert.isObject(results.modules[0]);
+            assert.strictEqual(results.modules[0].methodAggregate.sloc.logical, 3);
+            assert.strictEqual(results.modules[1].methodAggregate.sloc.logical, 2);
          });
 
          test('sanity test - parse', () =>
@@ -113,7 +113,7 @@ if (testconfig.modules['index'])
             assert.isObject(ast.program);
          });
 
-         test('sanity test - processProjectResults', () =>
+         test('sanity test - processProject', () =>
          {
             const sources =
             [
@@ -123,14 +123,14 @@ if (testconfig.modules['index'])
 
             let results = escomplex.analyzeProject(sources, { skipCalculation: true });
 
-            results = escomplex.processProjectResults(results);
+            results = escomplex.processProject(results);
 
             assert.isObject(results);
-            assert.isArray(results.reports);
-            assert.strictEqual(results.reports.length, 2);
-            assert.isObject(results.reports[0]);
-            assert.strictEqual(results.reports[0].aggregate.sloc.logical, 3);
-            assert.strictEqual(results.reports[1].aggregate.sloc.logical, 2);
+            assert.isArray(results.modules);
+            assert.strictEqual(results.modules.length, 2);
+            assert.isObject(results.modules[0]);
+            assert.strictEqual(results.modules[0].methodAggregate.sloc.logical, 3);
+            assert.strictEqual(results.modules[1].methodAggregate.sloc.logical, 2);
          });
 
          test('sanity test - analyzeAsync', () =>
@@ -140,7 +140,7 @@ if (testconfig.modules['index'])
             promise.then((result) =>
             {
                assert.isObject(result);
-               assert.strictEqual(result.aggregate.sloc.logical, 3);
+               assert.strictEqual(result.methodAggregate.sloc.logical, 3);
             });
          });
 
@@ -157,7 +157,7 @@ if (testconfig.modules['index'])
             promise.then((result) =>
             {
                assert.isObject(result);
-               assert.strictEqual(result.aggregate.sloc.logical, 3);
+               assert.strictEqual(result.methodAggregate.sloc.logical, 3);
             });
          });
 
@@ -174,11 +174,11 @@ if (testconfig.modules['index'])
             promise.then((results) =>
             {
                assert.isObject(results);
-               assert.isArray(results.reports);
-               assert.strictEqual(results.reports.length, 2);
-               assert.isObject(results.reports[0]);
-               assert.strictEqual(results.reports[0].aggregate.sloc.logical, 3);
-               assert.strictEqual(results.reports[1].aggregate.sloc.logical, 2);
+               assert.isArray(results.modules);
+               assert.strictEqual(results.modules.length, 2);
+               assert.isObject(results.modules[0]);
+               assert.strictEqual(results.modules[0].methodAggregate.sloc.logical, 3);
+               assert.strictEqual(results.modules[1].methodAggregate.sloc.logical, 2);
             });
          });
 
@@ -201,11 +201,11 @@ if (testconfig.modules['index'])
             promise.then((results) =>
             {
                assert.isObject(results);
-               assert.isArray(results.reports);
-               assert.strictEqual(results.reports.length, 2);
-               assert.isObject(results.reports[0]);
-               assert.strictEqual(results.reports[0].aggregate.sloc.logical, 3);
-               assert.strictEqual(results.reports[1].aggregate.sloc.logical, 2);
+               assert.isArray(results.modules);
+               assert.strictEqual(results.modules.length, 2);
+               assert.isObject(results.modules[0]);
+               assert.strictEqual(results.modules[0].methodAggregate.sloc.logical, 3);
+               assert.strictEqual(results.modules[1].methodAggregate.sloc.logical, 2);
             });
          });
 
@@ -221,7 +221,7 @@ if (testconfig.modules['index'])
             });
          });
 
-         test('sanity test - processProjectResultsAsync', () =>
+         test('sanity test - processProjectAsync', () =>
          {
             const sources =
             [
@@ -231,15 +231,15 @@ if (testconfig.modules['index'])
 
             escomplex.analyzeProjectAsync(sources, { skipCalculation: true }).then((results) =>
             {
-               return escomplex.processProjectResultsAsync(results);
+               return escomplex.processProjectAsync(results);
             }).then((results) =>
             {
                assert.isObject(results);
-               assert.isArray(results.reports);
-               assert.strictEqual(results.reports.length, 2);
-               assert.isObject(results.reports[0]);
-               assert.strictEqual(results.reports[0].aggregate.sloc.logical, 3);
-               assert.strictEqual(results.reports[1].aggregate.sloc.logical, 2);
+               assert.isArray(results.modules);
+               assert.strictEqual(results.modules.length, 2);
+               assert.isObject(results.modules[0]);
+               assert.strictEqual(results.modules[0].methodAggregate.sloc.logical, 3);
+               assert.strictEqual(results.modules[1].methodAggregate.sloc.logical, 2);
             });
          });
       });

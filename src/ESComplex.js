@@ -34,7 +34,7 @@ export default class ESComplex
    constructor(options = {})
    {
       /* istanbul ignore if */
-      if (typeof options !== 'object') { throw new TypeError('ctor error: `options` is not an `object`.'); }
+      if (typeof options !== 'object') { throw new TypeError(`ctor error: 'options' is not an 'object'.`); }
 
       /**
        * An instance of ESComplexModule.
@@ -60,10 +60,10 @@ export default class ESComplex
     *
     * @returns {object} - A single module report.
     */
-   analyze(source, options = {}, parserOptions = undefined)
+   analyzeModule(source, options = {}, parserOptions = undefined)
    {
       /* istanbul ignore if */
-      if (typeof source !== 'string') { throw new TypeError('analyze error: `source` is not a `string`.'); }
+      if (typeof source !== 'string') { throw new TypeError(`analyze error: 'source' is not a 'string'.`); }
 
       return this._escomplexModule.analyze(Parser.parse(source, parserOptions), options);
    }
@@ -76,7 +76,7 @@ export default class ESComplex
     *
     * @returns {object} - A single module report.
     */
-   analyzeAST(ast, options = {})
+   analyzeModuleAST(ast, options = {})
    {
       return this._escomplexModule.analyze(ast, options);
    }
@@ -160,9 +160,9 @@ export default class ESComplex
     *
     * @returns {{reports: Array<{}>}} - An object hash with a `reports` entry that is an Array of module results.
     */
-   processProjectResults(results, options = {})
+   processProject(results, options = {})
    {
-      return this._escomplexProject.processResults(results, options);
+      return this._escomplexProject.process(results, options);
    }
 
    // Asynchronous Promise based methods ----------------------------------------------------------------------------
@@ -266,11 +266,11 @@ export default class ESComplex
     * @returns {Promise<{reports: Array<{}>}>} - An object hash with a `reports` entry that is an Array of module
     *                                            results.
     */
-   processProjectResultsAsync(results, options = {})
+   processProjectAsync(results, options = {})
    {
       return new Promise((resolve, reject) =>
       {
-         try { resolve(this.processProjectResults(results, options)); }
+         try { resolve(this.processProject(results, options)); }
          catch (err) { /* istanbul ignore next */ reject(err); }
       });
    }

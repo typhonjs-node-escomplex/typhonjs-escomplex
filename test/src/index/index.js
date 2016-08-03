@@ -40,6 +40,36 @@ if (testconfig.modules['index'])
             assert.isFunction(escomplex.processProject);
          });
 
+         test('analyzeModuleAsync function is exported', () =>
+         {
+            assert.isFunction(escomplex.analyzeModuleAsync);
+         });
+
+         test('analyzeModuleASTAsync function is exported', () =>
+         {
+            assert.isFunction(escomplex.analyzeModuleASTAsync);
+         });
+
+         test('analyzeProjectAsync function is exported', () =>
+         {
+            assert.isFunction(escomplex.analyzeProjectAsync);
+         });
+
+         test('analyzeProjectASTAsync function is exported', () =>
+         {
+            assert.isFunction(escomplex.analyzeProjectASTAsync);
+         });
+
+         test('parseAsync function is exported', () =>
+         {
+            assert.isFunction(escomplex.parseAsync);
+         });
+
+         test('processProjectAsync function is exported', () =>
+         {
+            assert.isFunction(escomplex.processProjectAsync);
+         });
+
          test('sanity test - analyzeModule', () =>
          {
             const result = escomplex.analyzeModule('class Foo {}; class Bar extends Foo { constructor() { super(); } }');
@@ -133,9 +163,9 @@ if (testconfig.modules['index'])
             assert.strictEqual(results.modules[1].methodAggregate.sloc.logical, 2);
          });
 
-         test('sanity test - analyzeAsync', () =>
+         test('sanity test - analyzeModuleAsync', () =>
          {
-            const promise = escomplex.analyzeAsync('class Foo {}; class Bar extends Foo { constructor() { super(); } }');
+            const promise = escomplex.analyzeModuleAsync('class Foo {}; class Bar extends Foo { constructor() { super(); } }');
 
             promise.then((result) =>
             {
@@ -144,7 +174,7 @@ if (testconfig.modules['index'])
             });
          });
 
-         test('sanity test - analyzeASTAsync', () =>
+         test('sanity test - analyzeModuleASTAsync', () =>
          {
             const ast = escomplex.parse('class Foo {}; class Bar extends Foo { constructor() { super(); } }');
 
@@ -152,7 +182,7 @@ if (testconfig.modules['index'])
             assert.strictEqual(ast.type, 'File');
             assert.isObject(ast.program);
 
-            const promise = escomplex.analyzeASTAsync(ast);
+            const promise = escomplex.analyzeModuleASTAsync(ast);
 
             promise.then((result) =>
             {

@@ -177,11 +177,11 @@ export default class ESComplex
     *
     * @returns {object} - A single module report.
     */
-   analyzeAsync(source, options = {}, parserOptions = undefined)
+   analyzeModuleAsync(source, options = {}, parserOptions = undefined)
    {
       return new Promise((resolve, reject) =>
       {
-         try { resolve(this.analyze(source, options, parserOptions)); }
+         try { resolve(this.analyzeModule(source, options, parserOptions)); }
          catch (err) { /* istanbul ignore next */ reject(err); }
       });
    }
@@ -194,11 +194,11 @@ export default class ESComplex
     *
     * @returns {Promise<object>} - A single module report.
     */
-   analyzeASTAsync(ast, options = {})
+   analyzeModuleASTAsync(ast, options = {})
    {
       return new Promise((resolve, reject) =>
       {
-         try { resolve(this.analyzeAST(ast, options)); }
+         try { resolve(this.analyzeModuleAST(ast, options)); }
          catch (err) { /* istanbul ignore next */ reject(err); }
       });
    }

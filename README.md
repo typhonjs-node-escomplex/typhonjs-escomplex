@@ -10,14 +10,14 @@
 [![Coverage](https://img.shields.io/codecov/c/github/typhonjs-node-escomplex/typhonjs-escomplex.svg)](https://codecov.io/github/typhonjs-node-escomplex/typhonjs-escomplex)
 [![Dependency Status](https://www.versioneye.com/user/projects/575dc05d7757a0003bd4c2a3/badge.svg?style=flat)](https://www.versioneye.com/user/projects/575dc05d7757a0003bd4c2a3)
 
-`typhonjs-escomplex` provides next generation Javascript complexity reports by utilizing [babylon](https://github.com/babel/babylon) w/ all plugins enabled to parse JS source code feeding the rest of the AST / processing modules which are available separately. Please review the [typhonjs-node-escomplex](https://github.com/typhonjs-node-escomplex) organization for all of the separate components which may be used independently if direct AST processing is required. `typhonjs-escomplex` simply provides a shim using `babylon` to produce the AST. 
+`typhonjs-escomplex` provides next generation Javascript complexity reports by utilizing [babylon](https://github.com/babel/babylon) w/ all plugins enabled to parse JS source code feeding the rest of the AST / processing modules which are available separately. Please review the [typhonjs-node-escomplex](https://github.com/typhonjs-node-escomplex) organization for all of the separate components which may be used independently if direct AST processing is required. `typhonjs-escomplex` simply provides a shim using `babylon` to produce the AST.
 
-Work is swiftly being finished. 
+Work is swiftly being finished.
 
 More information forthcoming. This NPM module can be installed as a dependency in `package.json` as follows:
 ```
 "dependencies": {
-  "typhonjs-escomplex": "^0.0.4"
+  "typhonjs-escomplex": "^0.0.9"
 }
 ```
 
@@ -28,7 +28,7 @@ import escomplex from 'typhonjs-escomplex';
 
 const source = <some JS source code>;
 
-const report = escomplex.analyze(source);
+const report = escomplex.analyzeModule(source);
 ```
 
 
@@ -38,5 +38,5 @@ var escomplex = require('typhonjs-escomplex');
 
 var source = <some JS source code>;
 
-var report = escomplex.analyze(source);
+var report = escomplex.analyzeModule(source);
 ```

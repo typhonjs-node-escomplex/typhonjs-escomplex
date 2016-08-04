@@ -20,10 +20,10 @@ export default class ESComplex
    /**
     * Initializes ESComplex.
     *
-    * @param {object}   options - module and project options including user plugins to load including:
+    * @param {object}      options - module and project options including user plugins to load including:
     * ```
     * (object)             module - Provides an object hash of the following options for the module runtime:
-    *    (boolean)         loadDefaultPlugins - When false ESComplexProject will not load any default plugins.
+    *    (boolean)         loadDefaultPlugins - When false ESComplexModule will not load any default plugins.
     *    (Array<Object>)   plugins - A list of ESComplexModule plugins that have already been instantiated.
     *
     * (object)             project - Provides an object hash of the following options for the project runtime:

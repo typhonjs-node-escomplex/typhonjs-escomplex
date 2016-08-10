@@ -1,6 +1,6 @@
 {
   "name": "typhonjs-escomplex",
-  "version": "0.0.11",
+  "version": "0.0.12",
   "description": "Next generation software complexity analysis of JavaScript-family abstract syntax trees.",
   "homepage": "https://github.com/typhonjs-node-escomplex/typhonjs-escomplex",
   "license": "MPL-2.0",
@@ -22,8 +22,8 @@
   "dependencies": {
     "babylon": "^6.0.0",
     "commander": "^2.0.0",
-    "typhonjs-escomplex-module": "^0.0.11",
-    "typhonjs-escomplex-project": "^0.0.11"
+    "typhonjs-escomplex-module": "^0.0.12",
+    "typhonjs-escomplex-project": "^0.0.12"
   },
   "devDependencies": {
     "typhonjs-config-eslint": "^0.4.0",

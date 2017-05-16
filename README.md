@@ -15,7 +15,7 @@
 Work is swiftly being finished.
 
 More information forthcoming. This NPM module can be installed as a dependency in `package.json` as follows:
-```
+```js
 "dependencies": {
   "typhonjs-escomplex": "^0.0.9"
 }
@@ -23,7 +23,7 @@ More information forthcoming. This NPM module can be installed as a dependency i
 
 
 An ES6 example follows:
-```
+```js
 import escomplex from 'typhonjs-escomplex';
 
 const source = <some JS source code>;
@@ -33,7 +33,7 @@ const report = escomplex.analyzeModule(source);
 
 
 A CJS example follows:
-```
+```js
 var escomplex = require('typhonjs-escomplex');
 
 var source = <some JS source code>;

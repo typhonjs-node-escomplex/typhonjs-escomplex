@@ -10,6 +10,8 @@
 [![Coverage](https://img.shields.io/codecov/c/github/typhonjs-node-escomplex/typhonjs-escomplex.svg)](https://codecov.io/github/typhonjs-node-escomplex/typhonjs-escomplex)
 [![Dependency Status](https://www.versioneye.com/user/projects/575dc05d7757a0003bd4c2a3/badge.svg?style=flat)](https://www.versioneye.com/user/projects/575dc05d7757a0003bd4c2a3)
 
+Update: Please see [issue#9](https://github.com/typhonjs-node-escomplex/typhonjs-escomplex/issues/9) for a proposed roadmap for the next official major release of typhonjs-escomplex which is planned for fall '18 or thereabout.
+
 `typhonjs-escomplex` provides next generation Javascript complexity reports by utilizing [babylon](https://github.com/babel/babylon) w/ all plugins enabled to parse JS source code feeding the rest of the AST / processing modules which are available separately. Please review the [typhonjs-node-escomplex](https://github.com/typhonjs-node-escomplex) organization for all of the separate components which may be used independently if direct AST processing is required. `typhonjs-escomplex` simply provides a shim using `babylon` to produce the AST.
 
 Work is swiftly being finished.
@@ -17,7 +19,7 @@ Work is swiftly being finished.
 More information forthcoming. This NPM module can be installed as a dependency in `package.json` as follows:
 ```js
 "dependencies": {
-  "typhonjs-escomplex": "^0.0.9"
+  "typhonjs-escomplex": "^0.0.12"
 }
 ```
 

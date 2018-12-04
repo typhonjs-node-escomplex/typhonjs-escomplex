@@ -1,7 +1,7 @@
 /**
- * Loads https://github.com/typhonjs/typhonjs-config-eslint/blob/master/2.0/es6/server/node/.eslintrc
+ * Loads https://github.com/typhonjs/typhonjs-config-eslint/blob/master/3.0/babel/es8/server/node/.eslintrc
  * NPM: https://www.npmjs.com/package/typhonjs-config-eslint
  */
 {
-   "extends": "./node_modules/typhonjs-config-eslint/2.0/es6/server/node/.eslintrc"
+   "extends": "./node_modules/typhonjs-config-eslint/3.0/babel/es8/server/node/.eslintrc"
 }

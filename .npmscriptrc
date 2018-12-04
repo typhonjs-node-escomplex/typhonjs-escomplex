@@ -23,5 +23,12 @@
 
       "istanbul": { "command": "cover", "options": ["--include-all-sources --root src"] },
       "mocha": { "source": "./test/src", "options": [ "-u tdd", "--compilers js:babel-register", "-t 120000 --recursive" ] }
+   },
+
+   // For local developer testing.
+   "dev_test":
+   {
+      "istanbul": { "command": "cover", "options": ["--include-all-sources --root src"] },
+      "mocha": { "source": "./test/src", "options": ["-u tdd", "--compilers js:babel-register", "-t 120000 --recursive"] }
    }
 }

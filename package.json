@@ -20,15 +20,15 @@
     }
   ],
   "dependencies": {
-    "babylon": "^6.0.0",
+    "@babel/parser": "^7.0.0",
     "commander": "^2.0.0",
     "typhonjs-escomplex-module": "^0.0.12",
     "typhonjs-escomplex-project": "^0.0.12"
   },
   "devDependencies": {
-    "typhonjs-config-eslint": "^0.4.0",
+    "typhonjs-config-eslint": "^0.5.0",
     "typhonjs-escomplex-test-data": "git+https://git@github.com/typhonjs-node-escomplex/typhonjs-escomplex-test-data.git",
-    "typhonjs-npm-build-test": "^0.3.0"
+    "typhonjs-npm-build-test": "^0.7.0"
   },
   "scripts": {
     "build": "babel-node ./node_modules/typhonjs-npm-scripts-build-babel/scripts/build.js",
@@ -37,7 +37,10 @@
     "eslint": "eslint .",
     "prepublish": "babel-node ./node_modules/typhonjs-npm-scripts-publish/scripts/prepublish.js",
     "test": "babel-node ./node_modules/typhonjs-npm-scripts-test-mocha/scripts/mocha.js",
-    "test-coverage": "babel-node ./node_modules/typhonjs-npm-scripts-test-mocha/scripts/mocha-istanbul.js"
+    "test-coverage": "babel-node ./node_modules/typhonjs-npm-scripts-test-mocha/scripts/mocha-istanbul.js",
+
+    "dev-test": "BABEL_ENV=escomplex-dev babel-node ./node_modules/typhonjs-npm-scripts-test-mocha/scripts/mocha.js dev_test",
+    "dev-test-coverage": "BABEL_ENV=escomplex-dev babel-node ./node_modules/typhonjs-npm-scripts-test-mocha/scripts/mocha-istanbul.js dev_test"
   },
   "keywords": [
     "typhonjs",

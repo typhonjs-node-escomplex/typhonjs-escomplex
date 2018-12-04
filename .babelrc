@@ -1,21 +1,38 @@
 {
-  "presets": ["es2015"],
-  "plugins":
-  [
-    "add-module-exports",
-    ["module-alias",
-      [
-        { "src": "npm:escomplex-plugin-syntax-estree/dist", "expose": "escomplex-plugin-syntax-estree/src" },
-        { "src": "npm:escomplex-plugin-syntax-babylon/dist", "expose": "escomplex-plugin-syntax-babylon/src" },
-        { "src": "npm:escomplex-plugin-metrics-module/dist", "expose": "escomplex-plugin-metrics-module/src" },
-        { "src": "npm:escomplex-plugin-metrics-project/dist", "expose": "escomplex-plugin-metrics-project/src" },
-        { "src": "npm:typhonjs-ast-walker/dist", "expose": "typhonjs-ast-walker/src" },
-        { "src": "npm:typhonjs-plugin-manager/dist", "expose": "typhonjs-plugin-manager/src" },
+   "presets": ["env", "stage-2"],
 
-        { "src": "npm:typhonjs-escomplex-commons/dist", "expose": "typhonjs-escomplex-commons/src" },
-        { "src": "npm:typhonjs-escomplex-module/dist", "expose": "typhonjs-escomplex-module/src" },
-        { "src": "npm:typhonjs-escomplex-project/dist", "expose": "typhonjs-escomplex-project/src" }
-      ]
-    ]
-  ]
+   "plugins":
+   [
+      "add-module-exports",
+      ["module-resolver", {
+         "root": ["."],
+         "alias":
+         {
+            "typhonjs-escomplex-module/src": "typhonjs-escomplex-module/dist",
+            "typhonjs-escomplex-project/src": "typhonjs-escomplex-project/dist"
+         }
+      }],
+      "transform-runtime"
+   ],
+
+   "env":
+   {
+      "escomplex-dev":
+      {
+         "plugins":
+         [
+            "add-module-exports",
+            ["module-resolver", {
+               "root": ["."],
+               "cwd": "babelrc",
+               "alias":
+               {
+                  "typhonjs-escomplex-module/src": "../typhonjs-escomplex-module/src",
+                  "typhonjs-escomplex-project/src": "../typhonjs-escomplex-project/src"
+               }
+            }],
+            "transform-runtime"
+         ]
+      }
+   }
 }

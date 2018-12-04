@@ -1,22 +1,23 @@
-import * as babylon from 'babylon';
+import * as babylon from '@babel/parser';
 
 /**
- * Provides a comprehensive regex test to determine if source code is an ES Module.
- * @type {RegExp}
- * @ignore
- */
-const s_ESM_REGEX = /(^\s*|[}\);\n]\s*)(import\s*(['"]|(\*\s+as\s+)?[^"'\(\)\n;]+\s*from\s*['"]|\{)|export\s+\*\s+from\s+["']|export\s* (\{|default|function|class|var|const|let|async\s+function))/;
-
-/**
- * Default babylon options applying all available plugins.
+ * Default babylon options applying most available plugins.
+ *
+ * Caveats include:
+ * - that both decorators and decorators-legacy can not be used simultaneously.
+ * - that both 'flow' and 'typescript' can not be used simultaneously
+ *
  * @type {{plugins: string[]}}
  * @ignore
  */
 const s_BABYLON_OPTIONS =
 {
-   plugins: ['asyncFunctions', 'asyncGenerators', 'classConstructorCall', 'classProperties',
-    'decorators', 'doExpressions', 'exportExtensions', 'exponentiationOperator', 'flow', 'functionBind', 'functionSent',
-     'jsx', 'objectRestSpread', 'trailingFunctionCommas']
+   plugins: ['asyncGenerators', 'bigInt', 'classProperties', 'classPrivateProperties', 'classPrivateMethods',
+    ['decorators', { decoratorsBeforeExport: false }], 'doExpressions', 'dynamicImport',
+     'exportDefaultFrom', 'exportNamespaceFrom',  'functionBind', 'functionSent', 'importMeta',
+      'jsx', 'logicalAssignment', 'nullishCoalescingOperator', 'numericSeparator', 'objectRestSpread',
+       'optionalCatchBinding', 'optionalChaining', ['pipelineOperator', { proposal: 'minimal' }], 'throwExpressions',
+        'typescript']
 };
 
 /**
@@ -36,7 +37,7 @@ export default class Parser
    static parse(source, options = undefined)
    {
       options = typeof options === 'object' ? options : s_BABYLON_OPTIONS;
-      options.sourceType = s_ESM_REGEX.test(source) ? 'module' : 'script';
+      options.sourceType = typeof options.sourceType === 'string' ? options.sourceType : 'unambiguous';
       return babylon.parse(source, options);
    }
 }

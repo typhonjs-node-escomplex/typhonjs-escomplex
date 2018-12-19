@@ -75,7 +75,7 @@ if (testconfig.modules['index'])
             const result = escomplex.analyzeModule('class Foo {}; class Bar extends Foo { constructor() { super(); } }');
 
             assert.isObject(result);
-            assert.strictEqual(result.methodAggregate.sloc.logical, 3);
+            assert.strictEqual(result.methodAggregate.sloc.logical, 4);
          });
 
          test('sanity test - analyzeModuleAST', () =>
@@ -89,7 +89,7 @@ if (testconfig.modules['index'])
             const result = escomplex.analyzeModuleAST(ast);
 
             assert.isObject(result);
-            assert.strictEqual(result.methodAggregate.sloc.logical, 3);
+            assert.strictEqual(result.methodAggregate.sloc.logical, 4);
          });
 
          test('sanity test - analyzeProject', () =>
@@ -106,7 +106,7 @@ if (testconfig.modules['index'])
             assert.isArray(results.modules);
             assert.strictEqual(results.modules.length, 2);
             assert.isObject(results.modules[0]);
-            assert.strictEqual(results.modules[0].methodAggregate.sloc.logical, 3);
+            assert.strictEqual(results.modules[0].methodAggregate.sloc.logical, 4);
             assert.strictEqual(results.modules[1].methodAggregate.sloc.logical, 2);
          });
 
@@ -130,7 +130,7 @@ if (testconfig.modules['index'])
             assert.isArray(results.modules);
             assert.strictEqual(results.modules.length, 2);
             assert.isObject(results.modules[0]);
-            assert.strictEqual(results.modules[0].methodAggregate.sloc.logical, 3);
+            assert.strictEqual(results.modules[0].methodAggregate.sloc.logical, 4);
             assert.strictEqual(results.modules[1].methodAggregate.sloc.logical, 2);
          });
 
@@ -159,7 +159,7 @@ if (testconfig.modules['index'])
             assert.isArray(results.modules);
             assert.strictEqual(results.modules.length, 2);
             assert.isObject(results.modules[0]);
-            assert.strictEqual(results.modules[0].methodAggregate.sloc.logical, 3);
+            assert.strictEqual(results.modules[0].methodAggregate.sloc.logical, 4);
             assert.strictEqual(results.modules[1].methodAggregate.sloc.logical, 2);
          });
 
@@ -170,7 +170,7 @@ if (testconfig.modules['index'])
             promise.then((result) =>
             {
                assert.isObject(result);
-               assert.strictEqual(result.methodAggregate.sloc.logical, 3);
+               assert.strictEqual(result.methodAggregate.sloc.logical, 4);
             });
          });
 
@@ -187,7 +187,7 @@ if (testconfig.modules['index'])
             promise.then((result) =>
             {
                assert.isObject(result);
-               assert.strictEqual(result.methodAggregate.sloc.logical, 3);
+               assert.strictEqual(result.methodAggregate.sloc.logical, 4);
             });
          });
 
@@ -207,7 +207,7 @@ if (testconfig.modules['index'])
                assert.isArray(results.modules);
                assert.strictEqual(results.modules.length, 2);
                assert.isObject(results.modules[0]);
-               assert.strictEqual(results.modules[0].methodAggregate.sloc.logical, 3);
+               assert.strictEqual(results.modules[0].methodAggregate.sloc.logical, 4);
                assert.strictEqual(results.modules[1].methodAggregate.sloc.logical, 2);
             });
          });
@@ -234,7 +234,7 @@ if (testconfig.modules['index'])
                assert.isArray(results.modules);
                assert.strictEqual(results.modules.length, 2);
                assert.isObject(results.modules[0]);
-               assert.strictEqual(results.modules[0].methodAggregate.sloc.logical, 3);
+               assert.strictEqual(results.modules[0].methodAggregate.sloc.logical, 4);
                assert.strictEqual(results.modules[1].methodAggregate.sloc.logical, 2);
             });
          });
@@ -268,7 +268,7 @@ if (testconfig.modules['index'])
                assert.isArray(results.modules);
                assert.strictEqual(results.modules.length, 2);
                assert.isObject(results.modules[0]);
-               assert.strictEqual(results.modules[0].methodAggregate.sloc.logical, 3);
+               assert.strictEqual(results.modules[0].methodAggregate.sloc.logical, 4);
                assert.strictEqual(results.modules[1].methodAggregate.sloc.logical, 2);
             });
          });

@@ -20,7 +20,7 @@
     }
   ],
   "dependencies": {
-    "@babel/parser": "^7.0.0",
+    "@typhonjs/babel-parser": "^0.1.0",
     "commander": "^2.0.0",
     "typhonjs-escomplex-module": "^0.0.12",
     "typhonjs-escomplex-project": "^0.0.12"
@@ -38,7 +38,6 @@
     "prepublish": "babel-node ./node_modules/typhonjs-npm-scripts-publish/scripts/prepublish.js",
     "test": "babel-node ./node_modules/typhonjs-npm-scripts-test-mocha/scripts/mocha.js",
     "test-coverage": "babel-node ./node_modules/typhonjs-npm-scripts-test-mocha/scripts/mocha-istanbul.js",
-
     "dev-test": "BABEL_ENV=escomplex-dev babel-node ./node_modules/typhonjs-npm-scripts-test-mocha/scripts/mocha.js dev_test",
     "dev-test-coverage": "BABEL_ENV=escomplex-dev babel-node ./node_modules/typhonjs-npm-scripts-test-mocha/scripts/mocha-istanbul.js dev_test"
   },

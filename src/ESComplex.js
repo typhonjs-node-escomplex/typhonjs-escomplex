@@ -1,9 +1,9 @@
 import path             from 'path';
 
+import BabelParser      from '@typhonjs/babel-parser';
+
 import ESComplexModule  from 'typhonjs-escomplex-module/src/ESComplexModule';
 import ESComplexProject from 'typhonjs-escomplex-project/src/ESComplexProject';
-
-import Parser           from './Parser';
 
 /**
  * Next generation code complexity reporting for Javascript abstract syntax trees (AST). ESComplex exposes all methods
@@ -55,24 +55,30 @@ export default class ESComplex
     * Parses the given source code then processes the generated AST and calculates metrics via plugins.
     *
     * @param {string}   source - Javascript source code.
-    * @param {object}   options - (Optional) module analyze options.
-    * @param {object}   parserOptions - (Optional) overrides default babylon parser options.
+    *
+    * @param {object}   [options] - Module analyze options.
+    *
+    * @param {object}   [parserOptions] - Overrides default Babel parser options.
+    *
+    * @param {object}   [parserOverride] - Provides helper directives to override options to simplify modification of
+    *                                      default Babel parser options.
     *
     * @returns {object} - A single module report.
     */
-   analyzeModule(source, options = {}, parserOptions = undefined)
+   analyzeModule(source, options = {}, parserOptions = void 0, parserOverride = void 0)
    {
       /* istanbul ignore if */
       if (typeof source !== 'string') { throw new TypeError(`analyze error: 'source' is not a 'string'.`); }
 
-      return this._escomplexModule.analyze(Parser.parse(source, parserOptions), options);
+      return this._escomplexModule.analyze(BabelParser.parseSource(source, parserOptions, parserOverride), options);
    }
 
    /**
     * Processes the given ast and calculates metrics via plugins.
     *
     * @param {object|Array}   ast - Javascript AST.
-    * @param {object}         options - (Optional) module analyze options.
+    *
+    * @param {object}         [options] - Module analyze options.
     *
     * @returns {object} - A single module report.
     */
@@ -87,13 +93,16 @@ export default class ESComplex
     * @param {Array<object>}  sources - Array of object hashes containing `code` and `srcPath` entries with optional
     *                                   entries include `filePath` and `srcPathAlias`.
     *
-    * @param {object}         options - (Optional) project processing options.
+    * @param {object}         [options] - Project processing options.
     *
-    * @param {object}         parserOptions - (Optional) overrides default babylon parser options.
+    * @param {object}         [parserOptions] - Overrides default Babel parser options.
+    *
+    * @param {object}         [parserOverride] - Provides helper directives to override options to simplify modification
+    *                                            of default Babel parser options.
     *
     * @returns {{reports: Array<{}>}} - An object hash with a `reports` entry that is an Array of module results.
     */
-   analyzeProject(sources, options = {}, parserOptions = undefined)
+   analyzeProject(sources, options = {}, parserOptions = void 0, parserOverride = void 0)
    {
       // Parse sources and map entries to include `ast` entry from `code`.
       const modules = sources.map((source) =>
@@ -101,7 +110,7 @@ export default class ESComplex
          try
          {
             return {
-               ast: Parser.parse(source.code, parserOptions),
+               ast: BabelParser.parseSource(source.code, parserOptions, parserOverride),
                filePath: source.filePath,
                srcPath: source.srcPath,
                srcPathAlias: source.srcPathAlias
@@ -140,22 +149,27 @@ export default class ESComplex
    }
 
    /**
-    * Provides a convenience method to parse the given source code and return the babylon AST.
+    * Provides a convenience method to parse the given source code and return the Babel parser AST.
     *
     * @param {string}   source - Javascript source code.
-    * @param {object}   parserOptions - (Optional) overrides default babylon parser options.
+    *
+    * @param {object}   [parserOptions] - Overrides default babylon parser options.
+    *
+    * @param {object}   [parserOverride] - Provides helper directives to override options to simplify modification
+    *                                      of default Babel parser options.
     *
     * @returns {object} - babylon generated AST.
     */
-   parse(source, parserOptions = undefined)
+   parse(source, parserOptions = void 0, parserOverride = void 0)
    {
-      return Parser.parse(source, parserOptions);
+      return BabelParser.parseSource(source, parserOptions, parserOverride);
    }
 
    /**
     * Processes existing project results and calculates metrics via plugins.
     *
     * @param {object}   results - An object hash with a `reports` entry that is an Array of module results.
+    *
     * @param {object}   options - (Optional) project processing options.
     *
     * @returns {{reports: Array<{}>}} - An object hash with a `reports` entry that is an Array of module results.
@@ -172,16 +186,21 @@ export default class ESComplex
     * plugins.
     *
     * @param {string}   source - Javascript source code.
-    * @param {object}   options - (Optional) module analyze options.
-    * @param {object}   parserOptions - (Optional) overrides default babylon parser options.
+    *
+    * @param {object}   [options] - Module analyze options.
+    *
+    * @param {object}   [parserOptions] - Overrides default babylon parser options.
+    *
+    * @param {object}   [parserOverride] - Provides helper directives to override options to simplify modification
+    *                                      of default Babel parser options.
     *
     * @returns {object} - A single module report.
     */
-   analyzeModuleAsync(source, options = {}, parserOptions = undefined)
+   analyzeModuleAsync(source, options = {}, parserOptions = void 0, parserOverride = void 0)
    {
       return new Promise((resolve, reject) =>
       {
-         try { resolve(this.analyzeModule(source, options, parserOptions)); }
+         try { resolve(this.analyzeModule(source, options, parserOptions, parserOverride)); }
          catch (err) { /* istanbul ignore next */ reject(err); }
       });
    }
@@ -190,7 +209,8 @@ export default class ESComplex
     * Wraps in a Promise processing the given ast and calculates metrics via plugins.
     *
     * @param {object|Array}   ast - Javascript AST.
-    * @param {object}         options - (Optional) module analyze options.
+    *
+    * @param {object}         [options] - Module analyze options.
     *
     * @returns {Promise<object>} - A single module report.
     */
@@ -207,17 +227,22 @@ export default class ESComplex
     * Wraps in a Promise processing the given sources and calculates project metrics via plugins.
     *
     * @param {Array<object>}  sources - Array of object hashes containing `code` and `path` entries.
-    * @param {object}         options - (Optional) project processing options.
-    * @param {object}         parserOptions - (Optional) overrides default babylon parser options.
+    *
+    * @param {object}         [options] - Project processing options.
+    *
+    * @param {object}         [parserOptions] - Overrides default babylon parser options.
+    *
+    * @param {object}         [parserOverride] - Provides helper directives to override options to simplify modification
+    *                                            of default Babel parser options.
     *
     * @returns {Promise<{reports: Array<{}>}>} - An object hash with a `reports` entry that is an Array of module
     *                                            results.
     */
-   analyzeProjectAsync(sources, options = {}, parserOptions = undefined)
+   analyzeProjectAsync(sources, options = {}, parserOptions = void 0, parserOverride = void 0)
    {
       return new Promise((resolve, reject) =>
       {
-         try { resolve(this.analyzeProject(sources, options, parserOptions)); }
+         try { resolve(this.analyzeProject(sources, options, parserOptions, parserOverride)); }
          catch (err) { /* istanbul ignore next */ reject(err); }
       });
    }
@@ -226,7 +251,8 @@ export default class ESComplex
     * Wraps in a Promise processing the given modules and calculates project metrics via plugins.
     *
     * @param {Array}    modules - Array of object hashes containing `ast` and `path` entries.
-    * @param {object}   options - (Optional) project processing options.
+    *
+    * @param {object}   [options] - Project processing options.
     *
     * @returns {Promise<{reports: Array<{}>}>} - An object hash with a `reports` entry that is an Array of module
     *                                            results.
@@ -244,15 +270,19 @@ export default class ESComplex
     * Wraps in a Promise a convenience method to parse the given source code and return the babylon AST.
     *
     * @param {string}   source - Javascript source code.
-    * @param {object}   parserOptions - (Optional) overrides default babylon parser options.
+    *
+    * @param {object}   [parserOptions] - Overrides default babylon parser options.
+    *
+    * @param {object}   [parserOverride] - Provides helper directives to override options to simplify modification
+    *                                      of default Babel parser options.
     *
     * @returns {Promise<object>} - babylon generated AST.
     */
-   parseAsync(source, parserOptions = undefined)
+   parseAsync(source, parserOptions = void 0, parserOverride = void 0)
    {
       return new Promise((resolve, reject) =>
       {
-         try { resolve(this.parse(source, parserOptions)); }
+         try { resolve(this.parse(source, parserOptions, parserOverride)); }
          catch (err) { /* istanbul ignore next */ reject(err); }
       });
    }

@@ -20,7 +20,7 @@
     }
   ],
   "dependencies": {
-    "@typhonjs/babel-parser": "^0.1.0",
+    "@typhonjs/babel-parser": "^0.2.0",
     "commander": "^2.0.0",
     "typhonjs-escomplex-module": "^0.0.12",
     "typhonjs-escomplex-project": "^0.0.12"

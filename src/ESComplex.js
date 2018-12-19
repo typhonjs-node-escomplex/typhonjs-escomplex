@@ -70,7 +70,7 @@ export default class ESComplex
       /* istanbul ignore if */
       if (typeof source !== 'string') { throw new TypeError(`analyze error: 'source' is not a 'string'.`); }
 
-      return this._escomplexModule.analyze(BabelParser.parseSource(source, parserOptions, parserOverride), options);
+      return this._escomplexModule.analyze(BabelParser.parse(source, parserOptions, parserOverride), options);
    }
 
    /**
@@ -110,7 +110,7 @@ export default class ESComplex
          try
          {
             return {
-               ast: BabelParser.parseSource(source.code, parserOptions, parserOverride),
+               ast: BabelParser.parse(source.code, parserOptions, parserOverride),
                filePath: source.filePath,
                srcPath: source.srcPath,
                srcPathAlias: source.srcPathAlias
@@ -162,7 +162,7 @@ export default class ESComplex
     */
    parse(source, parserOptions = void 0, parserOverride = void 0)
    {
-      return BabelParser.parseSource(source, parserOptions, parserOverride);
+      return BabelParser.parse(source, parserOptions, parserOverride);
    }
 
    /**

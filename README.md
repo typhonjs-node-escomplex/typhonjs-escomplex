@@ -10,6 +10,8 @@
 [![Coverage](https://img.shields.io/codecov/c/github/typhonjs-node-escomplex/typhonjs-escomplex.svg)](https://codecov.io/github/typhonjs-node-escomplex/typhonjs-escomplex)
 [![Dependency Status](https://david-dm.org/typhonjs-node-escomplex/typhonjs-escomplex/status.svg)](https://david-dm.org/typhonjs-node-escomplex/typhonjs-escomplex)
 
+0.1.0 update: Please refer to this [wiki page](https://github.com/typhonjs-node-escomplex/typhonjs-escomplex/wiki/0.1.0-update-guide) on report changes and other pertinent details when upgrading to `0.1.0`.
+
 Update: Please see [issue#9](https://github.com/typhonjs-node-escomplex/typhonjs-escomplex/issues/9) for a proposed roadmap for the next official major release of typhonjs-escomplex which is planned for fall '18 or thereabout.
 
 `typhonjs-escomplex` provides next generation Javascript and Typescript complexity reports by utilizing [babel parser](https://www.npmjs.com/package/@babel/parser) w/ all plugins enabled to parse JS / TS source code feeding the rest of the AST / processing modules which are available separately. Please review the [typhonjs-node-escomplex](https://github.com/typhonjs-node-escomplex) organization for all of the separate components which may be used independently if direct AST processing is required. `typhonjs-escomplex` simply provides a shim using `babel parser` to produce the AST.

@@ -272,6 +272,34 @@ if (testconfig.modules['index'])
                assert.strictEqual(results.modules[1].aggregate.sloc.logical, 2);
             });
          });
+
+         test('test .vue file support ', () =>
+         {
+            const sources = '<template><div>test for vue</div></template> <script lang="javascript">export default { data () {return {foo: 1}}}</script>';
+
+            escomplex.analyzeModuleAsync(sources, { extName: 'vue' }).then((results) => {
+               assert.isObject(results);
+               assert.strictEqual(results.aggregate.sloc.logical, 3);
+            });
+         });
+
+         test('test .vue file using typescript', () =>
+         {
+            const sources = '<template><div>test for vue</div></template> <script lang="javascript">@Component export default class Test {readonly test = 1;}</script>';
+
+            escomplex.analyzeModuleAsync(
+               sources, 
+               { extName: 'vue' }, 
+               undefined, 
+               {
+                  decoratorsBeforeExport: true,
+                  decoratorsLegacy: true
+               }).then((results) => {
+               assert.isObject(results);
+               assert.strictEqual(results.aggregate.sloc.logical, 1);
+            });
+         });
+
       });
    });
 }

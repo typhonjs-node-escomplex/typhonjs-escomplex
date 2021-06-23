@@ -70,6 +70,13 @@ export default class ESComplex
       /* istanbul ignore if */
       if (typeof source !== 'string') { throw new TypeError(`analyze error: 'source' is not a 'string'.`); }
 
+      if (options && ['.vue', 'vue'].includes(options.extName)) {
+         let matchRes = source.match(/<script\b[^>]*>[\s\S]*<\/script>/g);
+         if (matchRes) {
+            source = matchRes[0].replace(/(<script\b[^>]*>)|(<\/script>)/g, '');
+         }
+      }
+
       return this._escomplexModule.analyze(BabelParser.parse(source, parserOptions, parserOverride), options);
    }
 
